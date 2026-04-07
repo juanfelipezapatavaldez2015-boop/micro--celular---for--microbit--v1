@@ -107,7 +107,7 @@ input.onButtonPressed(Button.AB, function () {
                 `)
             basic.clearScreen()
             if (Firmware_version == 8) {
-                basic.pause(5000)
+                basic.pause(1000)
                 basic.showString("8")
                 basic.pause(1000)
                 serial.redirectToUSB()
