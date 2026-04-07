@@ -96,31 +96,21 @@ input.onButtonPressed(Button.AB, function () {
 input.onButtonPressed(Button.B, function () {
     if (baseband == 9856810520262024) {
         if (SElinux == 0) {
-            if (true) {
-                basic.showLeds(`
-                    . . # . .
-                    . . # . .
-                    # . # . #
-                    # . . . #
-                    # # # # #
-                    `)
-                radio.setFrequencyBand(53)
-                radio.setTransmitPower(7)
-                radio.setGroup(1)
-                radio.setTransmitSerialNumber(true)
-                radio.sendNumber(12)
-                radio.sendValue("baseband", 9856810520262024)
-                radio.sendValue("device", 12)
-                radio.sendString("shell console debug")
-            } else {
-                basic.showLeds(`
-                    . . # . .
-                    . # . # .
-                    # . # . #
-                    # . # . #
-                    # # # # #
-                    `)
-            }
+            basic.showLeds(`
+                . . # . .
+                . . # . .
+                # . # . #
+                # . . . #
+                # # # # #
+                `)
+            radio.setFrequencyBand(53)
+            radio.setTransmitPower(7)
+            radio.setGroup(1)
+            radio.setTransmitSerialNumber(true)
+            radio.sendNumber(12)
+            radio.sendValue("baseband", 9856810520262024)
+            radio.sendValue("device", 12)
+            radio.sendString("shell console debug")
         } else {
             basic.showLeds(`
                 . . # . .
@@ -157,6 +147,15 @@ downgrade_counter += 0 * 1
 debug_mode_checksum += 1
 SElinux += 0
 Sistema_Operativo += 25
+basic.pause(1000)
+radio.setGroup(1)
+radio.setTransmitPower(7)
+radio.setFrequencyBand(56)
+radio.raiseEvent(
+EventBusSource.MICROBIT_ID_RADIO,
+EventBusValue.MICROBIT_EVT_ANY
+)
+radio.setTransmitSerialNumber(true)
 kittenwifi.wifi_join("FLIAZAPATA-ULTRA", "Viviz@pata1329")
 kittenwifi.ntp_get(kittenwifi.NtpTimeType.s1970)
 basic.pause(3000)
@@ -233,11 +232,3 @@ basic.showLeds(`
     . . . # .
     . . # . .
     `)
-radio.setGroup(1)
-radio.setTransmitPower(7)
-radio.setFrequencyBand(56)
-radio.raiseEvent(
-EventBusSource.MICROBIT_ID_RADIO,
-EventBusValue.MICROBIT_EVT_ANY
-)
-radio.setTransmitSerialNumber(true)
