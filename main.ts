@@ -106,9 +106,9 @@ input.onButtonPressed(Button.AB, function () {
                 . . . . .
                 `)
             basic.clearScreen()
-            if (Firmware_version == 5) {
+            if (Firmware_version == 6) {
                 basic.pause(1000)
-                basic.showString("5")
+                basic.showString("6")
                 basic.pause(1000)
                 serial.redirectToUSB()
             } else {
@@ -174,6 +174,7 @@ let Sistema_Operativo = 0
 let SElinux = 0
 let debug_mode_checksum = 0
 let downgrade_counter = 0
+let update_counter = 0
 let Firmware_version = 0
 let direccion_ip_del_wifi = 0
 let bootloader_security_checksum = 0
@@ -181,7 +182,8 @@ let Debug_mode = 0
 Debug_mode += 5
 bootloader_security_checksum += 1
 direccion_ip_del_wifi += 1
-Firmware_version += 5
+Firmware_version += 6
+update_counter += 0 * 1
 downgrade_counter += 0 * 1
 debug_mode_checksum += 1
 SElinux += 0
