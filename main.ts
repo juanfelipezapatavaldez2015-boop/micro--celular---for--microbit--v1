@@ -57,8 +57,7 @@ input.onButtonPressed(Button.A, function () {
     }
 })
 input.onButtonPressed(Button.AB, function () {
-    serial.redirectToUSB()
-    serial.setTxBufferSize(32)
+	
 })
 input.onButtonPressed(Button.B, function () {
     for (let index = 0; index < 4; index++) {
@@ -89,11 +88,20 @@ input.onButtonPressed(Button.B, function () {
             `)
     }
 })
+let bootloader_security_checksum = 0
+bootloader_security_checksum += 1
+serial.redirect(
+SerialPin.P0,
+SerialPin.P1,
+BaudRate.BaudRate115200
+)
 kittenwifi.ntp_get(kittenwifi.NtpTimeType.s1970)
 basic.pause(3000)
-if (("bootloader security checksum" as any) == ("1" as any)) {
+if (bootloader_security_checksum == 1) {
     kittenwifi.udp_comm("192.168.0.100", 1234)
 } else {
+    serial.redirectToUSB()
+    serial.setTxBufferSize(32)
     basic.showLeds(`
         . # . . .
         . . # . .
