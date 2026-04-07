@@ -11,7 +11,7 @@ input.onButtonPressed(Button.A, function () {
         kittenwifi.wifi_join("FLIAZAPATA-ULTRA", "Viviz@pata1329")
         kittenwifi.rest_request("GET", "/api/test?apple=1")
         kittenwifi.udp_comm("192.168.18.228", 1234)
-        if (kittenwifi.wifi_addr() == "192.168.18.228") {
+        if (direccion_ip_del_wifi == 1) {
             kittenwifi.udp_comm("192.168.18.228", 1234)
             kittenwifi.wifi_init(SerialPin.P1, SerialPin.P2)
             kittenwifi.mqtt_publish(
@@ -22,13 +22,14 @@ input.onButtonPressed(Button.A, function () {
             kittenwifi.mqtt_sethost("iot.kittenbot.cn", "node01")
             kittenwifi.mqtt_sethost("iot.kittenbot.cn", "node01")
         } else {
-        	
+            basic.showIcon(IconNames.Diamond)
         }
         kittenwifi.rest_header(kittenwifi.HeaderType.ContentType, "application/json")
         kittenwifi.rest_header(kittenwifi.HeaderType.ContentType, "processor mediatek 1.0 horizon beta")
         kittenwifi.rest_header(kittenwifi.HeaderType.UserAgent, "Mozilla 5.0")
         kittenwifi.wifi_changename("I:micro device")
         kittenwifi.udp_comm("192.168.18.1", 4)
+        kittenwifi.udp_send("Micro:bit connected")
         kittenwifi.mqtt_publish(
         "shell console",
         "'OR 1=1'-- o #"
@@ -46,7 +47,7 @@ input.onButtonPressed(Button.A, function () {
         ""
         )
         if (true) {
-            kittenwifi.udp_send("Micro:bit connected")
+        	
         } else {
             basic.showLeds(`
                 # # # # .
@@ -75,17 +76,13 @@ input.onButtonPressed(Button.A, function () {
 })
 input.onButtonPressed(Button.AB, function () {
     if (Sistema_Operativo == 25) {
-        if (Firmware_version == 6) {
-            basic.showString("5")
+        if (Firmware_version == 7) {
+            basic.showString("7")
             basic.pause(1000)
             serial.redirectToUSB()
         } else {
             serial.redirectToUSB()
-            serial.redirect(
-            SerialPin.P0,
-            SerialPin.P1,
-            BaudRate.BaudRate115200
-            )
+            serial.setBaudRate(BaudRate.BaudRate115200)
             basic.showLeds(`
                 . . # . .
                 . . # . .
@@ -146,7 +143,7 @@ let direccion_ip_del_wifi = 0
 let bootloader_security_checksum = 0
 bootloader_security_checksum += 1
 direccion_ip_del_wifi += 1
-Firmware_version += 6
+Firmware_version += 7
 SElinux += 0
 Sistema_Operativo += 25
 kittenwifi.wifi_join("FLIAZAPATA-ULTRA", "Viviz@pata1329")
