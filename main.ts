@@ -77,36 +77,14 @@ input.onButtonPressed(Button.A, function () {
 input.onButtonPressed(Button.AB, function () {
     if (Sistema_Operativo == 25) {
         if (Debug_mode == 5) {
-            basic.showLeds(`
-                # # # # .
-                . . . . .
-                . . . . .
-                . . . . .
-                . . . . .
-                `)
-            basic.showLeds(`
-                # # # # .
-                # # . . .
-                . . . . .
-                . . . . .
-                . . . . .
-                `)
-            basic.showLeds(`
-                # # # # .
-                # # . . .
-                # # # . .
-                . . . . .
-                . . . . .
-                `)
-            basic.showLeds(`
-                # # # # .
-                # # . . .
-                # # # . .
-                # # . . .
-                . . . . .
-                `)
-            basic.clearScreen()
             if (Firmware_version == 6) {
+                if (kernel_version == 11) {
+                    basic.showString("1")
+                    basic.pause(100)
+                    basic.clearScreen()
+                } else {
+                    control.reset()
+                }
                 basic.pause(1000)
                 basic.showString("6")
                 basic.pause(1000)
@@ -131,42 +109,44 @@ input.onButtonPressed(Button.AB, function () {
     }
 })
 input.onButtonPressed(Button.B, function () {
-    if (SElinux == 0) {
-        for (let index = 0; index < 4; index++) {
-            radio.setFrequencyBand(53)
-            radio.setTransmitPower(7)
-            radio.setGroup(1)
-            radio.setTransmitSerialNumber(true)
-            radio.sendNumber(12)
-            radio.sendValue("baseband", 9856810520262024)
-            radio.sendValue("device", 12)
-            radio.sendString("shell console debug")
-        }
-        if (true) {
-            basic.showLeds(`
-                . . # . .
-                . # . # .
-                # . # . #
-                # . # . #
-                # # # # #
-                `)
+    if (baseband == 9856810520262024) {
+        if (SElinux == 0) {
+            if (true) {
+                basic.showLeds(`
+                    . . # . .
+                    . . # . .
+                    # . # . #
+                    # . . . #
+                    # # # # #
+                    `)
+                radio.setFrequencyBand(53)
+                radio.setTransmitPower(7)
+                radio.setGroup(1)
+                radio.setTransmitSerialNumber(true)
+                radio.sendNumber(12)
+                radio.sendValue("baseband", 9856810520262024)
+                radio.sendValue("device", 12)
+                radio.sendString("shell console debug")
+            } else {
+                basic.showLeds(`
+                    . . # . .
+                    . # . # .
+                    # . # . #
+                    # . # . #
+                    # # # # #
+                    `)
+            }
         } else {
             basic.showLeds(`
                 . . # . .
                 . . # . .
-                # . # . #
-                # . . . #
-                # # # # #
+                . . # . .
+                . . . . .
+                . . # . .
                 `)
+            control.reset()
         }
     } else {
-        basic.showLeds(`
-            . . # . .
-            . . # . .
-            . . # . .
-            . . . . .
-            . . # . .
-            `)
         control.reset()
     }
 })
@@ -176,14 +156,18 @@ let debug_mode_checksum = 0
 let downgrade_counter = 0
 let update_counter = 0
 let Firmware_version = 0
+let kernel_version = 0
 let direccion_ip_del_wifi = 0
 let bootloader_security_checksum = 0
 let Debug_mode = 0
+let baseband = 0
+baseband = 9856810520262024
 Debug_mode += 5
 bootloader_security_checksum += 1
 direccion_ip_del_wifi += 1
+kernel_version += 11
 Firmware_version += 6
-update_counter += 0 * 1
+update_counter += 0 * 2
 downgrade_counter += 0 * 1
 debug_mode_checksum += 1
 SElinux += 0
