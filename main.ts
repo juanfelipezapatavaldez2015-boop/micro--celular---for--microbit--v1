@@ -75,39 +75,22 @@ input.onButtonPressed(Button.A, function () {
     }
 })
 input.onButtonPressed(Button.AB, function () {
-    if (bootloader_security_checksum) {
-        if (Sistema_Operativo == 25) {
-            if (Debug_mode == 5) {
-                if (Firmware_version == 7) {
-                    if (kernel_version == 11) {
-                        basic.showString("1")
-                        basic.pause(100)
-                        basic.clearScreen()
-                    } else {
-                        control.reset()
-                    }
-                    basic.pause(1000)
-                    basic.showString("7")
-                    basic.pause(1000)
-                    serial.redirectToUSB()
-                } else {
-                    serial.redirectToUSB()
-                    serial.setBaudRate(BaudRate.BaudRate115200)
-                    basic.showLeds(`
-                        . . # . .
-                        . . # . .
-                        # . # . #
-                        # . . . #
-                        # # # # #
-                        `)
-                }
-            } else {
-                control.reset()
-            }
-        } else {
-            control.reset()
-            serial.redirectToUSB()
-        }
+    if (Firmware_version == 7) {
+        basic.clearScreen()
+        basic.pause(1000)
+        basic.showString("7")
+        basic.pause(1000)
+        serial.redirectToUSB()
+    } else {
+        serial.redirectToUSB()
+        serial.setBaudRate(BaudRate.BaudRate115200)
+        basic.showLeds(`
+            . . # . .
+            . . # . .
+            # . # . #
+            # . . . #
+            # # # # #
+            `)
     }
 })
 input.onButtonPressed(Button.B, function () {
