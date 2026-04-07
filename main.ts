@@ -75,37 +75,39 @@ input.onButtonPressed(Button.A, function () {
     }
 })
 input.onButtonPressed(Button.AB, function () {
-    if (Sistema_Operativo == 25) {
-        if (Debug_mode == 5) {
-            if (Firmware_version == 6) {
-                if (kernel_version == 11) {
-                    basic.showString("1")
-                    basic.pause(100)
-                    basic.clearScreen()
+    if (bootloader_security_checksum) {
+        if (Sistema_Operativo == 25) {
+            if (Debug_mode == 5) {
+                if (Firmware_version == 7) {
+                    if (kernel_version == 11) {
+                        basic.showString("1")
+                        basic.pause(100)
+                        basic.clearScreen()
+                    } else {
+                        control.reset()
+                    }
+                    basic.pause(1000)
+                    basic.showString("7")
+                    basic.pause(1000)
+                    serial.redirectToUSB()
                 } else {
-                    control.reset()
+                    serial.redirectToUSB()
+                    serial.setBaudRate(BaudRate.BaudRate115200)
+                    basic.showLeds(`
+                        . . # . .
+                        . . # . .
+                        # . # . #
+                        # . . . #
+                        # # # # #
+                        `)
                 }
-                basic.pause(1000)
-                basic.showString("6")
-                basic.pause(1000)
-                serial.redirectToUSB()
             } else {
-                serial.redirectToUSB()
-                serial.setBaudRate(BaudRate.BaudRate115200)
-                basic.showLeds(`
-                    . . # . .
-                    . . # . .
-                    # . # . #
-                    # . . . #
-                    # # # # #
-                    `)
+                control.reset()
             }
         } else {
             control.reset()
+            serial.redirectToUSB()
         }
-    } else {
-        control.reset()
-        serial.redirectToUSB()
     }
 })
 input.onButtonPressed(Button.B, function () {
@@ -166,7 +168,7 @@ Debug_mode += 5
 bootloader_security_checksum += 1
 direccion_ip_del_wifi += 1
 kernel_version += 11
-Firmware_version += 6
+Firmware_version += 7
 update_counter += 0 * 2
 downgrade_counter += 0 * 1
 debug_mode_checksum += 1
