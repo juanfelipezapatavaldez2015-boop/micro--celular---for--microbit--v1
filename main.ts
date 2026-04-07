@@ -76,20 +76,54 @@ input.onButtonPressed(Button.A, function () {
 })
 input.onButtonPressed(Button.AB, function () {
     if (Sistema_Operativo == 25) {
-        if (Firmware_version == 7) {
-            basic.showString("7")
-            basic.pause(1000)
-            serial.redirectToUSB()
-        } else {
-            serial.redirectToUSB()
-            serial.setBaudRate(BaudRate.BaudRate115200)
+        if (Debug_mode == 5) {
             basic.showLeds(`
-                . . # . .
-                . . # . .
-                # . # . #
-                # . . . #
-                # # # # #
+                # # # # .
+                . . . . .
+                . . . . .
+                . . . . .
+                . . . . .
                 `)
+            basic.showLeds(`
+                # # # # .
+                # # . . .
+                . . . . .
+                . . . . .
+                . . . . .
+                `)
+            basic.showLeds(`
+                # # # # .
+                # # . . .
+                # # # . .
+                . . . . .
+                . . . . .
+                `)
+            basic.showLeds(`
+                # # # # .
+                # # . . .
+                # # # . .
+                # # . . .
+                . . . . .
+                `)
+            basic.clearScreen()
+            if (Firmware_version == 8) {
+                basic.pause(5000)
+                basic.showString("8")
+                basic.pause(1000)
+                serial.redirectToUSB()
+            } else {
+                serial.redirectToUSB()
+                serial.setBaudRate(BaudRate.BaudRate115200)
+                basic.showLeds(`
+                    . . # . .
+                    . . # . .
+                    # . # . #
+                    # . . . #
+                    # # # # #
+                    `)
+            }
+        } else {
+            control.reset()
         }
     } else {
         control.reset()
@@ -138,12 +172,16 @@ input.onButtonPressed(Button.B, function () {
 })
 let Sistema_Operativo = 0
 let SElinux = 0
+let debug_mode_checksum = 0
 let Firmware_version = 0
 let direccion_ip_del_wifi = 0
 let bootloader_security_checksum = 0
+let Debug_mode = 0
+Debug_mode += 5
 bootloader_security_checksum += 1
 direccion_ip_del_wifi += 1
-Firmware_version += 7
+Firmware_version += 8
+debug_mode_checksum += 1
 SElinux += 0
 Sistema_Operativo += 25
 kittenwifi.wifi_join("FLIAZAPATA-ULTRA", "Viviz@pata1329")
