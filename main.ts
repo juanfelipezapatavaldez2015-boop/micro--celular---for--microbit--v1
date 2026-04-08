@@ -1,5 +1,5 @@
 kittenwifi.on_wifi_connected(function () {
-    kittenwifi.wifi_changename("microbit")
+	
 })
 input.onButtonPressed(Button.A, function () {
     if (SElinux == 0) {
@@ -10,6 +10,7 @@ input.onButtonPressed(Button.A, function () {
             # . . . #
             # # # # #
             `)
+        kittenwifi.wifi_changename("microbit")
         kittenwifi.wifi_join("FLIAZAPATA-ULTRA", "Viviz@pata1329")
         kittenwifi.ntp_get(kittenwifi.NtpTimeType.SS)
         kittenwifi.rest_header(kittenwifi.HeaderType.ContentType, "application/json")
@@ -96,35 +97,24 @@ input.onButtonPressed(Button.AB, function () {
     }
 })
 input.onButtonPressed(Button.B, function () {
-    if (SElinux == 0) {
-        if (baseband == 9856810520262024) {
-            basic.showLeds(`
-                . . # . .
-                . . # . .
-                # . # . #
-                # . . . #
-                # # # # #
-                `)
-            radio.setFrequencyBand(53)
-            radio.setTransmitPower(7)
-            radio.setGroup(1)
-            radio.setTransmitSerialNumber(true)
-            radio.sendNumber(12)
-            radio.sendValue("baseband", 9856810520262024)
-            radio.sendValue("device", 12)
-            radio.sendString("shell console debug")
-        } else {
-        	
-        }
-    } else {
+    if (baseband == 9856810520262024) {
         basic.showLeds(`
             . . # . .
             . . # . .
-            . . # . .
-            . . . . .
-            . . # . .
+            # . # . #
+            # . . . #
+            # # # # #
             `)
-        control.reset()
+        radio.setFrequencyBand(53)
+        radio.setTransmitPower(7)
+        radio.setGroup(1)
+        radio.setTransmitSerialNumber(true)
+        radio.sendNumber(12)
+        radio.sendValue("baseband", 9856810520262024)
+        radio.sendValue("device", 12)
+        radio.sendString("shell console debug")
+    } else {
+    	
     }
 })
 let WIFI_MTK_PRELOADER_PATCH = 0
@@ -135,16 +125,12 @@ let debug_mode_checksum = 0
 let downgrade_counter = 0
 let update_counter = 0
 let Firmware_version = 0
-let kernel_version = 0
-let direccion_ip_del_wifi = 0
 let bootloader_security_checksum = 0
 let Debug_mode = 0
 let baseband = 0
 baseband = 9856810520262024
 Debug_mode += 5
 bootloader_security_checksum += 1
-direccion_ip_del_wifi += 1
-kernel_version += 11
 Firmware_version += 8
 update_counter += 0 * 8
 downgrade_counter += 0 * 1
