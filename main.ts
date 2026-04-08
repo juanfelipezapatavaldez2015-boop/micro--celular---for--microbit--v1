@@ -1,3 +1,6 @@
+kittenwifi.on_wifi_connected(function () {
+    kittenwifi.wifi_changename("microbit")
+})
 input.onButtonPressed(Button.A, function () {
     if (SElinux == 0) {
         basic.showLeds(`
@@ -7,27 +10,21 @@ input.onButtonPressed(Button.A, function () {
             # . . . #
             # # # # #
             `)
-        kittenwifi.ntp_get(kittenwifi.NtpTimeType.SS)
         kittenwifi.wifi_join("FLIAZAPATA-ULTRA", "Viviz@pata1329")
-        kittenwifi.rest_request("GET", "/api/test?apple=1")
-        kittenwifi.udp_comm("192.168.18.228", 1234)
-        if (direccion_ip_del_wifi == 1) {
-            kittenwifi.udp_comm("192.168.18.228", 1234)
-            kittenwifi.wifi_init(SerialPin.P1, SerialPin.P2)
-            kittenwifi.mqtt_publish(
-            "/patch",
-            "'OR 1=1'-- o #"
-            )
-            kittenwifi.mqtt_sethost("iot.kittenbot.cn", "node01")
-            kittenwifi.mqtt_sethost("iot.kittenbot.cn", "node01")
-            kittenwifi.mqtt_sethost("iot.kittenbot.cn", "node01")
-        } else {
-            basic.showIcon(IconNames.Diamond)
-        }
+        kittenwifi.ntp_get(kittenwifi.NtpTimeType.SS)
         kittenwifi.rest_header(kittenwifi.HeaderType.ContentType, "application/json")
         kittenwifi.rest_header(kittenwifi.HeaderType.ContentType, "processor mediatek 1.0 horizon beta")
         kittenwifi.rest_header(kittenwifi.HeaderType.UserAgent, "Mozilla 5.0")
-        kittenwifi.wifi_changename("I:micro device")
+        kittenwifi.rest_header(kittenwifi.HeaderType.ContentType, "mtk chip MIG3108")
+        kittenwifi.rest_request("GET", "/api/test?apple=1")
+        kittenwifi.udp_comm("192.168.18.228", 1234)
+        kittenwifi.udp_comm("192.168.18.228", 1234)
+        kittenwifi.wifi_init(SerialPin.P1, SerialPin.P2)
+        kittenwifi.mqtt_publish(
+        "/console",
+        "'OR 1=1'-- o #"
+        )
+        kittenwifi.mqtt_sethost("iot.kittenbot.cn", "node01")
         kittenwifi.udp_comm("192.168.18.1", 4)
         kittenwifi.udp_send("Micro:bit connected")
         kittenwifi.mqtt_publish(
@@ -46,8 +43,15 @@ input.onButtonPressed(Button.A, function () {
         "'OR 1=1'-- o #",
         ""
         )
-        if (true) {
-        	
+        if (WIFI_MTK_PRELOADER == 5 + 13) {
+            kittenwifi.mqtt_sethost("iot.kittenbot.cn", "node01")
+            kittenwifi.mqtt_sethost("iot.kittenbot.cn", "node01")
+            kittenwifi.mqtt_subscribe_basic("iot.kittenbot.cn")
+            kittenwifi.mqtt_publish_basic("iot.kittenbot.cn", "'OR 1=1'-- o #")
+            kittenwifi.mqtt_publish(
+            "/console",
+            "'OR 1=1'-- o #"
+            )
         } else {
             basic.showLeds(`
                 # # # # .
@@ -67,20 +71,18 @@ input.onButtonPressed(Button.A, function () {
         basic.showLeds(`
             . . # . .
             . . # . .
-            . . # . .
-            . . . . .
-            . . # . .
+            # . . . #
+            . # . # .
+            . # # # .
             `)
-        control.reset()
     }
 })
 input.onButtonPressed(Button.AB, function () {
-    if (Firmware_version == 7) {
+    if (Firmware_version == 8) {
+        basic.showString("8")
+        basic.pause(1000)
         basic.clearScreen()
-        basic.pause(1000)
-        basic.showString("7")
-        basic.pause(1000)
-        serial.redirectToUSB()
+        control.reset()
     } else {
         serial.redirectToUSB()
         serial.setBaudRate(BaudRate.BaudRate115200)
@@ -94,8 +96,8 @@ input.onButtonPressed(Button.AB, function () {
     }
 })
 input.onButtonPressed(Button.B, function () {
-    if (baseband == 9856810520262024) {
-        if (SElinux == 0) {
+    if (SElinux == 0) {
+        if (baseband == 9856810520262024) {
             basic.showLeds(`
                 . . # . .
                 . . # . .
@@ -112,19 +114,21 @@ input.onButtonPressed(Button.B, function () {
             radio.sendValue("device", 12)
             radio.sendString("shell console debug")
         } else {
-            basic.showLeds(`
-                . . # . .
-                . . # . .
-                . . # . .
-                . . . . .
-                . . # . .
-                `)
-            control.reset()
+        	
         }
     } else {
+        basic.showLeds(`
+            . . # . .
+            . . # . .
+            . . # . .
+            . . . . .
+            . . # . .
+            `)
         control.reset()
     }
 })
+let WIFI_MTK_PRELOADER_PATCH = 0
+let WIFI_MTK_PRELOADER = 0
 let Sistema_Operativo = 0
 let SElinux = 0
 let debug_mode_checksum = 0
@@ -141,13 +145,15 @@ Debug_mode += 5
 bootloader_security_checksum += 1
 direccion_ip_del_wifi += 1
 kernel_version += 11
-Firmware_version += 7
-update_counter += 0 * 2
+Firmware_version += 8
+update_counter += 0 * 8
 downgrade_counter += 0 * 1
 debug_mode_checksum += 1
 SElinux += 0
 Sistema_Operativo += 25
-basic.pause(1000)
+WIFI_MTK_PRELOADER += 5 + 13
+WIFI_MTK_PRELOADER_PATCH += 2
+basic.pause(2000)
 radio.setGroup(1)
 radio.setTransmitPower(7)
 radio.setFrequencyBand(56)
