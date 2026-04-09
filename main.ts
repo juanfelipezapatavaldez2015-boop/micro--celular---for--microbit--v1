@@ -109,7 +109,6 @@ input.onButtonPressed(Button.B, function () {
 })
 let boot_system = 0
 let SElinux = 0
-let downgrade_counter = 0
 let update_counter = 0
 let Firmware_version = 0
 let bootloader_security_checksum = 0
@@ -122,14 +121,14 @@ basic.showLeds(`
     . # # . .
     . # # # .
     `)
+let DEVICE_STATE_ = "UNLOCKED"
 let USB_OTA_DOWNLOADER = "DOWNLOAD"
 let hw_product9856810520262024 = "hw_product:9856810520262024"
 baseband = 9856810520262024
 Debug_mode += 5
 bootloader_security_checksum += 1
 Firmware_version += 10
-update_counter += 0 * 12
-downgrade_counter += 0 * 1
+update_counter += 6 + 12
 SElinux += 0
 boot_system += 1
 basic.pause(2000)
@@ -189,13 +188,6 @@ if (boot_system == 1) {
     control.reset()
 }
 basic.forever(function () {
-    if (USB_OTA_DOWNLOADER == "DOWNLOAD") {
-        serial.redirectToUSB()
-        Debug_mode = 6
-        serial.setBaudRate(BaudRate.BaudRate115200)
-    }
-})
-basic.forever(function () {
     if (Debug_mode == 6) {
         if (input.buttonIsPressed(Button.A)) {
             kittenwifi.wifi_changename("microbit")
@@ -213,5 +205,13 @@ basic.forever(function () {
         }
     } else {
     	
+    }
+})
+basic.forever(function () {
+    if (USB_OTA_DOWNLOADER == "DOWNLOAD") {
+        serial.setBaudRate(BaudRate.BaudRate115200)
+        serial.redirectToUSB()
+        Debug_mode = 6
+        update_counter = 6 + (12 + 1)
     }
 })
