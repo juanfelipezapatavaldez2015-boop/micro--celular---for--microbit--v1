@@ -189,32 +189,27 @@ if (boot_system == 1) {
     control.reset()
 }
 basic.forever(function () {
-    if (input.buttonIsPressed(Button.A)) {
-        kittenwifi.wifi_changename("microbit")
-    } else {
-    	
-    }
-})
-basic.forever(function () {
     if (USB_OTA_DOWNLOADER == "DOWNLOAD") {
         serial.redirectToUSB()
-        serial.redirect(
-        SerialPin.P0,
-        SerialPin.P1,
-        BaudRate.BaudRate115200
-        )
+        Debug_mode = 6
+        serial.setBaudRate(BaudRate.BaudRate115200)
     }
 })
 basic.forever(function () {
-    if (hw_product9856810520262024 == "hw_product:9856810520262024") {
-        if (Firmware_version == 10) {
-            if (input.buttonIsPressed(Button.AB)) {
-                basic.showString("I")
-                basic.showIcon(IconNames.Heart)
-                basic.showIcon(IconNames.Tortoise)
-            }
+    if (Debug_mode == 6) {
+        if (input.buttonIsPressed(Button.A)) {
+            kittenwifi.wifi_changename("microbit")
         } else {
         	
+        }
+    }
+})
+basic.forever(function () {
+    if (Firmware_version == 10) {
+        if (input.buttonIsPressed(Button.AB)) {
+            basic.showString("I")
+            basic.showIcon(IconNames.Heart)
+            basic.showIcon(IconNames.Tortoise)
         }
     } else {
     	
