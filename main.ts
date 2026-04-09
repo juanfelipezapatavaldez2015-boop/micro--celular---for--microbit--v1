@@ -10,11 +10,9 @@ input.onButtonPressed(Button.A, function () {
         kittenwifi.wifi_join("FLIAZAPATA-ULTRA", "Viviz@pata1329")
         kittenwifi.ntp_get(kittenwifi.NtpTimeType.SS)
         kittenwifi.rest_header(kittenwifi.HeaderType.ContentType, "application/json")
-        kittenwifi.rest_header(kittenwifi.HeaderType.ContentType, "processor mediatek 1.0 horizon beta")
+        kittenwifi.rest_header(kittenwifi.HeaderType.ContentType, "processor mediatek 1.0 3310 horizon beta")
         kittenwifi.rest_header(kittenwifi.HeaderType.UserAgent, "Mozilla 5.0")
-        kittenwifi.rest_header(kittenwifi.HeaderType.ContentType, "mtk chip MIG3108")
         kittenwifi.rest_request("GET", "/api/test?apple=1")
-        kittenwifi.wifi_init(SerialPin.P1, SerialPin.P2)
         kittenwifi.mqtt_publish(
         "/console",
         "'OR 1=1'-- o #"
@@ -46,6 +44,9 @@ input.onButtonPressed(Button.A, function () {
         "/console",
         "'OR 1=1'-- o #"
         )
+        kittenwifi.mqtt_sethost("iot.kittenbot.cn", "node01")
+        kittenwifi.udp_comm("192.168.0.100", 1234)
+        kittenwifi.udp_send("hello")
         if (true) {
             basic.showIcon(IconNames.Yes)
         } else {
@@ -62,8 +63,9 @@ input.onButtonPressed(Button.A, function () {
     }
 })
 input.onButtonPressed(Button.AB, function () {
-    if (Firmware_version == 9) {
-        basic.showString("9")
+    if (Firmware_version == 10) {
+        basic.pause(5000)
+        basic.showString("10")
         basic.pause(1000)
     } else {
         serial.redirectToUSB()
@@ -106,8 +108,6 @@ input.onButtonPressed(Button.B, function () {
     }
 })
 let boot_system = 0
-let WIFI_MTK_PRELOADER_PATCH = 0
-let WIFI_MTK_PRELOADER = 0
 let SElinux = 0
 let downgrade_counter = 0
 let update_counter = 0
@@ -115,15 +115,20 @@ let Firmware_version = 0
 let bootloader_security_checksum = 0
 let Debug_mode = 0
 let baseband = 0
+basic.showLeds(`
+    . # . . .
+    . . # . .
+    . # # # .
+    . # # . .
+    . # # # .
+    `)
 baseband = 9856810520262024
 Debug_mode += 5
 bootloader_security_checksum += 1
-Firmware_version += 9
-update_counter += 0 * 11
+Firmware_version += 10
+update_counter += 0 * 12
 downgrade_counter += 0 * 1
 SElinux += 0
-WIFI_MTK_PRELOADER += 5 + 13
-WIFI_MTK_PRELOADER_PATCH += 2
 boot_system += 1
 basic.pause(2000)
 radio.setGroup(1)
@@ -142,7 +147,7 @@ if (bootloader_security_checksum == 1) {
         . # # . .
         . # # # .
         `)
-    basic.pause(1000)
+    basic.pause(500)
     control.reset()
 }
 if (boot_system == 1) {
@@ -184,6 +189,17 @@ if (boot_system == 1) {
 basic.forever(function () {
     if (input.buttonIsPressed(Button.A)) {
         kittenwifi.wifi_changename("microbit")
+    } else {
+    	
+    }
+})
+basic.forever(function () {
+    if (Firmware_version == 10) {
+        if (input.buttonIsPressed(Button.AB)) {
+            basic.showString("I")
+            basic.showIcon(IconNames.Heart)
+            basic.showIcon(IconNames.Tortoise)
+        }
     } else {
     	
     }

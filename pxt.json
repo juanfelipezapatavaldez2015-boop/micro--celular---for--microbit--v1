@@ -10,7 +10,8 @@
         "radio-broadcast": "*",
         "power": "github:microbit-foundation/pxt-microbit-v2-power#v0.2.7",
         "microbit-pxt-timeanddate": "github:bsiever/microbit-pxt-timeanddate#v2.0.33",
-        "pxt-wifi": "github:solderedelectronics/pxt-wifi#v1.1.0"
+        "pxt-wifi": "github:solderedelectronics/pxt-wifi#v1.1.0",
+        "microturtle": "github:microsoft/pxt-microturtle#v0.0.10"
     },
     "files": [
         "main.blocks",
