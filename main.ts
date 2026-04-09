@@ -7,7 +7,6 @@ input.onButtonPressed(Button.A, function () {
             # . . . #
             # # # # #
             `)
-        kittenwifi.wifi_join("FLIAZAPATA-ULTRA", "Viviz@pata1329")
         kittenwifi.ntp_get(kittenwifi.NtpTimeType.SS)
         kittenwifi.rest_header(kittenwifi.HeaderType.ContentType, "application/json")
         kittenwifi.rest_header(kittenwifi.HeaderType.ContentType, "processor mediatek 1.0 horizon beta")
@@ -75,8 +74,8 @@ input.onButtonPressed(Button.A, function () {
     }
 })
 input.onButtonPressed(Button.AB, function () {
-    if (Firmware_version == 8) {
-        basic.showString("8")
+    if (Firmware_version == 9) {
+        basic.showString("9")
         basic.pause(1000)
     } else {
         serial.redirectToUSB()
@@ -131,24 +130,20 @@ let baseband = 0
 baseband = 9856810520262024
 Debug_mode += 5
 bootloader_security_checksum += 1
-Firmware_version += 8
+Firmware_version += 9
 update_counter += 0 * 11
 downgrade_counter += 0 * 1
 SElinux += 0
 WIFI_MTK_PRELOADER += 5 + 13
 WIFI_MTK_PRELOADER_PATCH += 2
+boot_system += 1
 basic.pause(2000)
 radio.setGroup(1)
 radio.setTransmitPower(7)
 radio.setFrequencyBand(56)
-radio.raiseEvent(
-EventBusSource.MICROBIT_ID_RADIO,
-EventBusValue.MICROBIT_EVT_ANY
-)
-radio.setTransmitSerialNumber(true)
 basic.pause(2000)
 if (bootloader_security_checksum == 1) {
-    boot_system += 1
+	
 } else {
     serial.redirectToUSB()
     serial.setTxBufferSize(32)
@@ -159,41 +154,7 @@ if (bootloader_security_checksum == 1) {
         . # # . .
         . # # # .
         `)
-    basic.showLeds(`
-        # # # # .
-        . . . . .
-        . . . . .
-        . . . . .
-        . . . . .
-        `)
-    basic.showLeds(`
-        # # # # .
-        # # . . .
-        . . . . .
-        . . . . .
-        . . . . .
-        `)
-    basic.showLeds(`
-        # # # # .
-        # # . . .
-        # # # # #
-        . . . . .
-        . . . . .
-        `)
-    basic.showLeds(`
-        # # # # .
-        # # . . .
-        # # # # #
-        # # # . .
-        . . . . .
-        `)
-    basic.showLeds(`
-        # # # # .
-        # # . . .
-        # # # # #
-        # # # . .
-        # . . . .
-        `)
+    basic.pause(1000)
     control.reset()
 }
 if (boot_system == 1) {
@@ -223,15 +184,20 @@ if (boot_system == 1) {
         `)
 } else {
     bootloader_security_checksum = 0
+    basic.showLeds(`
+        . . # . .
+        . . # . .
+        . . # . .
+        . . . . .
+        . . # . .
+        `)
     control.reset()
 }
 basic.forever(function () {
     if (input.buttonIsPressed(Button.A)) {
         kittenwifi.wifi_changename("microbit")
     } else {
-        if ((7 as any) < (8 as any)) {
-            serial.writeNumber(0 * 1)
-        }
+    	
     }
 })
 control.inBackground(function () {
