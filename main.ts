@@ -39,25 +39,14 @@ input.onButtonPressed(Button.A, function () {
         "'OR 1=1'-- o #",
         ""
         )
-        if (WIFI_MTK_PRELOADER == 5 + 13) {
-            kittenwifi.mqtt_sethost("iot.kittenbot.cn", "node01")
-            kittenwifi.mqtt_sethost("iot.kittenbot.cn", "node01")
-            kittenwifi.mqtt_subscribe_basic("iot.kittenbot.cn")
-            kittenwifi.mqtt_publish_basic("iot.kittenbot.cn", "'OR 1=1'-- o #")
-            kittenwifi.mqtt_publish(
-            "/console",
-            "'OR 1=1'-- o #"
-            )
-        } else {
-            basic.showLeds(`
-                # # # # .
-                # # # # #
-                # # . . .
-                # # # # .
-                . . . . .
-                `)
-            control.reset()
-        }
+        kittenwifi.mqtt_sethost("iot.kittenbot.cn", "node01")
+        kittenwifi.mqtt_sethost("iot.kittenbot.cn", "node01")
+        kittenwifi.mqtt_subscribe_basic("iot.kittenbot.cn")
+        kittenwifi.mqtt_publish_basic("iot.kittenbot.cn", "'OR 1=1'-- o #")
+        kittenwifi.mqtt_publish(
+        "/console",
+        "'OR 1=1'-- o #"
+        )
         if (true) {
             basic.showIcon(IconNames.Yes)
         } else {
