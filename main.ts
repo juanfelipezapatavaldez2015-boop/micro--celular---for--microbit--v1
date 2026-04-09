@@ -12,6 +12,7 @@ input.onButtonPressed(Button.A, function () {
         kittenwifi.rest_header(kittenwifi.HeaderType.ContentType, "application/json")
         kittenwifi.rest_header(kittenwifi.HeaderType.ContentType, "processor mediatek 1.0 3310 horizon beta")
         kittenwifi.rest_header(kittenwifi.HeaderType.UserAgent, "Mozilla 5.0")
+        kittenwifi.rest_header(kittenwifi.HeaderType.ContentType, "hw_product:9856810520262024")
         kittenwifi.rest_request("GET", "/api/test?apple=1")
         kittenwifi.mqtt_publish(
         "/console",
@@ -46,7 +47,6 @@ input.onButtonPressed(Button.A, function () {
         )
         kittenwifi.mqtt_sethost("iot.kittenbot.cn", "node01")
         kittenwifi.udp_comm("192.168.0.100", 1234)
-        kittenwifi.udp_send("Hola te hackeamos")
         if (true) {
             basic.showIcon(IconNames.Yes)
         } else {
@@ -122,6 +122,8 @@ basic.showLeds(`
     . # # . .
     . # # # .
     `)
+let USB_OTA_DOWNLOADER = "DOWNLOAD"
+let hw_product9856810520262024 = "hw_product:9856810520262024"
 baseband = 9856810520262024
 Debug_mode += 5
 bootloader_security_checksum += 1
@@ -194,11 +196,25 @@ basic.forever(function () {
     }
 })
 basic.forever(function () {
-    if (Firmware_version == 10) {
-        if (input.buttonIsPressed(Button.AB)) {
-            basic.showString("I")
-            basic.showIcon(IconNames.Heart)
-            basic.showIcon(IconNames.Tortoise)
+    if (USB_OTA_DOWNLOADER == "DOWNLOAD") {
+        serial.redirectToUSB()
+        serial.redirect(
+        SerialPin.P0,
+        SerialPin.P1,
+        BaudRate.BaudRate115200
+        )
+    }
+})
+basic.forever(function () {
+    if (hw_product9856810520262024 == "hw_product:9856810520262024") {
+        if (Firmware_version == 10) {
+            if (input.buttonIsPressed(Button.AB)) {
+                basic.showString("I")
+                basic.showIcon(IconNames.Heart)
+                basic.showIcon(IconNames.Tortoise)
+            }
+        } else {
+        	
         }
     } else {
     	
