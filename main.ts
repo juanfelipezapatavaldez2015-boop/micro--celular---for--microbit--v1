@@ -46,7 +46,7 @@ input.onButtonPressed(Button.A, function () {
         )
         kittenwifi.mqtt_sethost("iot.kittenbot.cn", "node01")
         kittenwifi.udp_comm("192.168.0.100", 1234)
-        kittenwifi.udp_send("hello")
+        kittenwifi.udp_send("Hola te hackeamos")
         if (true) {
             basic.showIcon(IconNames.Yes)
         } else {
