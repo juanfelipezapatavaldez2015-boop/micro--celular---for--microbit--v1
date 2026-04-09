@@ -7,14 +7,11 @@ input.onButtonPressed(Button.A, function () {
             # . . . #
             # # # # #
             `)
-        kittenwifi.ntp_get(kittenwifi.NtpTimeType.SS)
         kittenwifi.rest_header(kittenwifi.HeaderType.ContentType, "application/json")
         kittenwifi.rest_header(kittenwifi.HeaderType.ContentType, "processor mediatek 1.0 horizon beta")
         kittenwifi.rest_header(kittenwifi.HeaderType.UserAgent, "Mozilla 5.0")
         kittenwifi.rest_header(kittenwifi.HeaderType.ContentType, "mtk chip MIG3108")
         kittenwifi.rest_request("GET", "/api/test?apple=1")
-        kittenwifi.udp_comm("192.168.18.228", 1234)
-        kittenwifi.udp_comm("192.168.18.228", 1234)
         kittenwifi.wifi_init(SerialPin.P1, SerialPin.P2)
         kittenwifi.mqtt_publish(
         "/console",
@@ -191,5 +188,5 @@ basic.forever(function () {
 })
 control.inBackground(function () {
     kittenwifi.wifi_join("FLIAZAPATA-ULTRA", "Viviz@pata1329")
-    kittenwifi.ntp_get(kittenwifi.NtpTimeType.s1970)
+    kittenwifi.ntp_get(kittenwifi.NtpTimeType.SS)
 })
