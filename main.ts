@@ -7,6 +7,8 @@ input.onButtonPressed(Button.A, function () {
             # . . . #
             # # # # #
             `)
+        kittenwifi.wifi_join("FLIAZAPATA-ULTRA", "Viviz@pata1329")
+        kittenwifi.ntp_get(kittenwifi.NtpTimeType.SS)
         kittenwifi.rest_header(kittenwifi.HeaderType.ContentType, "application/json")
         kittenwifi.rest_header(kittenwifi.HeaderType.ContentType, "processor mediatek 1.0 horizon beta")
         kittenwifi.rest_header(kittenwifi.HeaderType.UserAgent, "Mozilla 5.0")
@@ -185,8 +187,4 @@ basic.forever(function () {
     } else {
     	
     }
-})
-control.inBackground(function () {
-    kittenwifi.wifi_join("FLIAZAPATA-ULTRA", "Viviz@pata1329")
-    kittenwifi.ntp_get(kittenwifi.NtpTimeType.SS)
 })
