@@ -59,13 +59,11 @@ input.onButtonPressed(Button.AB, function () {
     }
 })
 input.onButtonPressed(Button.B, function () {
-    for (let index = 0; index < 8; index++) {
+    while (true) {
         radio.setGroup(1)
         radio.setTransmitPower(7)
         radio.setFrequencyBand(40)
         radio.sendValue("KEY_ID", randint(0, 8.465485958698595e+61))
-        basic.clearScreen()
-        basic.pause(10)
         basic.showLeds(`
             . . . . .
             # # . . .
@@ -73,7 +71,7 @@ input.onButtonPressed(Button.B, function () {
             # # . # #
             . . . . .
             `)
-        if (radio.receivedPacket(RadioPacketProperty.SignalStrength) > 1) {
+        if (radio.receivedPacket(RadioPacketProperty.SignalStrength) <= 1) {
             basic.showLeds(`
                 . . # . .
                 . # . # .
