@@ -48,9 +48,7 @@ input.onButtonPressed(Button.AB, function () {
         basic.showString("I")
         basic.showIcon(IconNames.Heart)
         basic.showIcon(IconNames.Tortoise)
-        if (randint(0, 10) == 8) {
-            basic.showString("" + (control.deviceSerialNumber()))
-        }
+        basic.showString("" + (control.deviceSerialNumber()))
     }
 })
 input.onButtonPressed(Button.B, function () {
@@ -81,8 +79,6 @@ bootloader_security_checksum += control.deviceSerialNumber()
 Firmware_version += 10
 basic.pause(2000)
 if (bootloader_security_checksum == control.deviceSerialNumber()) {
-    radio.setTransmitPower(7)
-    radio.setFrequencyBand(40)
     music.play(music.stringPlayable("C F D F - G F C5 ", 151), music.PlaybackMode.UntilDone)
     basic.pause(200)
     basic.showLeds(`
