@@ -3,13 +3,36 @@ enum RadioMessage {
     UNLOCK = 16899
 }
 input.onButtonPressed(Button.A, function () {
-    basic.showLeds(`
-        . . # . .
-        . . # . .
-        # . # . #
-        # . . . #
-        # # # # #
-        `)
+    for (let index = 0; index < 4; index++) {
+        basic.showLeds(`
+            . . # . .
+            . . . . .
+            # . . . #
+            # . . . #
+            # # # # #
+            `)
+        basic.showLeds(`
+            . . # . .
+            . . # . .
+            # . . . #
+            # . . . #
+            # # # # #
+            `)
+        basic.showLeds(`
+            . . # . .
+            . . # . .
+            # . # . #
+            # . . . #
+            # # # # #
+            `)
+        basic.showLeds(`
+            . . # . .
+            . . # . .
+            # . # . #
+            # . # . #
+            # # # # #
+            `)
+    }
     kittenwifi.wifi_join("FLIAZAPATA-ULTRA", "Viviz@pata1329")
     kittenwifi.udp_comm(kittenwifi.wifi_addr(), 1234)
     kittenwifi.udp_send("handshake exitoso")
@@ -51,17 +74,23 @@ input.onButtonPressed(Button.B, function () {
         # # . # #
         . . . . .
         `)
+    radio.setGroup(1)
     radio.setTransmitPower(7)
     radio.setFrequencyBand(40)
-    radio.sendValue("KEY_ID", control.deviceSerialNumber())
-    if (("" as any) == ("UNLOCK" as any)) {
-    	
-    } else {
-    	
+    serial.redirectToUSB()
+    while (true) {
+        radio.sendValue("KEY_ID", randint(0, 8.465485958698595e+61))
+        if (true) {
+            basic.showLeds(`
+                . . # . .
+                . . # . .
+                # . # . #
+                # . . . #
+                # # # # #
+                `)
+        }
+        basic.clearScreen()
     }
-})
-radio.onReceivedValue(function (name, value) {
-    basic.showIcon(IconNames.Yes)
 })
 let name = 0
 let Firmware_version = 0
