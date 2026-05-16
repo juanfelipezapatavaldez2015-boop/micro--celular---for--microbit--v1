@@ -56,13 +56,17 @@ input.onButtonPressed(Button.AB, function () {
 input.onButtonPressed(Button.B, function () {
     basic.showLeds(`
         . . # . .
+        . . # . .
         # . # . #
-        # . # . #
-        # . . . #
-        . # # # .
+        . # . # .
+        . . # . .
         `)
-    basic.pause(500)
-    basic.clearScreen()
+    serial.redirectToUSB()
+    serial.redirect(
+    SerialPin.USB_TX,
+    SerialPin.USB_RX,
+    BaudRate.BaudRate115200
+    )
 })
 let Firmware_version = 0
 let bootloader_security_checksum = 0
@@ -73,11 +77,12 @@ basic.showLeds(`
     . # # . .
     . # # # .
     `)
-let baseband = 9856810520262024
 bootloader_security_checksum += control.deviceSerialNumber()
 Firmware_version += 10
 basic.pause(2000)
 if (bootloader_security_checksum == control.deviceSerialNumber()) {
+    radio.setTransmitPower(7)
+    radio.setFrequencyBand(40)
     music.play(music.stringPlayable("C F D F - G F C5 ", 151), music.PlaybackMode.UntilDone)
     basic.pause(200)
     basic.showLeds(`
