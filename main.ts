@@ -43,6 +43,7 @@ input.onButtonPressed(Button.AB, function () {
     }
 })
 input.onButtonPressed(Button.B, function () {
+    name += 1
     basic.showLeds(`
         . . . . .
         # # . . .
@@ -53,7 +54,16 @@ input.onButtonPressed(Button.B, function () {
     radio.setTransmitPower(7)
     radio.setFrequencyBand(40)
     radio.sendValue("KEY_ID", control.deviceSerialNumber())
+    if (("" as any) == ("UNLOCK" as any)) {
+    	
+    } else {
+    	
+    }
 })
+radio.onReceivedValue(function (name, value) {
+    basic.showIcon(IconNames.Yes)
+})
+let name = 0
 let Firmware_version = 0
 let bootloader_security_checksum = 0
 basic.showLeds(`
@@ -83,7 +93,14 @@ if (bootloader_security_checksum == control.deviceSerialNumber()) {
         . . # . .
         `)
 } else {
-    control.reset()
+    basic.showIcon(IconNames.Umbrella)
+    serial.setTxBufferSize(32)
+    serial.redirectToUSB()
+    serial.redirect(
+    SerialPin.USB_TX,
+    SerialPin.USB_RX,
+    BaudRate.BaudRate115200
+    )
 }
 basic.forever(function () {
     if (input.temperature() > 38) {
