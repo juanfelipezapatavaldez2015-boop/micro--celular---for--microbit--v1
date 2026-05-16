@@ -25,13 +25,6 @@ input.onButtonPressed(Button.A, function () {
             # . . . #
             # # # # #
             `)
-        basic.showLeds(`
-            . . # . .
-            . . # . .
-            # . # . #
-            # . # . #
-            # # # # #
-            `)
     }
     kittenwifi.wifi_join("FLIAZAPATA-ULTRA", "Viviz@pata1329")
     kittenwifi.udp_comm(kittenwifi.wifi_addr(), 1234)
@@ -77,19 +70,23 @@ input.onButtonPressed(Button.B, function () {
     radio.setGroup(1)
     radio.setTransmitPower(7)
     radio.setFrequencyBand(40)
-    serial.redirectToUSB()
     while (true) {
+        serial.redirectToUSB()
         radio.sendValue("KEY_ID", randint(0, 8.465485958698595e+61))
-        if (true) {
-            basic.showLeds(`
-                . . # . .
-                . . # . .
-                # . # . #
-                # . . . #
-                # # # # #
-                `)
-            basic.clearScreen()
-        }
+        serial.redirect(
+        SerialPin.USB_TX,
+        SerialPin.USB_RX,
+        BaudRate.BaudRate115200
+        )
+        basic.clearScreen()
+        basic.pause(20)
+        basic.showLeds(`
+            . . . . .
+            # # . . .
+            # . # # #
+            # # . # #
+            . . . . .
+            `)
     }
 })
 let name = 0
