@@ -55,6 +55,8 @@ input.onButtonPressed(Button.AB, function () {
 })
 input.onButtonPressed(Button.B, function () {
     basic.showIcon(IconNames.Tortoise)
+    basic.pause(500)
+    basic.clearScreen()
 })
 let Firmware_version = 0
 let bootloader_security_checksum = 0
