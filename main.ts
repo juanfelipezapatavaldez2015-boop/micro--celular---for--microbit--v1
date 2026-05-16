@@ -38,11 +38,8 @@ input.onButtonPressed(Button.A, function () {
     }
 })
 input.onButtonPressed(Button.AB, function () {
-    if (Firmware_version == 11) {
-        basic.showString("11")
-        basic.showString("I")
-        basic.showIcon(IconNames.Heart)
-        basic.showIcon(IconNames.Tortoise)
+    if (Firmware_version == 12) {
+        basic.showString("12")
     }
 })
 input.onButtonPressed(Button.B, function () {
@@ -50,11 +47,10 @@ input.onButtonPressed(Button.B, function () {
         . . . . .
         # # . . .
         # . # # #
-        # # . . #
+        # # . # #
         . . . . .
         `)
-    radio.sendMessage(RadioMessage.UNLOCK)
-    radio.sendNumber(control.deviceSerialNumber())
+    radio.sendValue("UNLOCK", control.deviceSerialNumber())
 })
 let Firmware_version = 0
 let bootloader_security_checksum = 0
@@ -66,10 +62,8 @@ basic.showLeds(`
     . # # # .
     `)
 bootloader_security_checksum += control.deviceSerialNumber()
-Firmware_version += 11
-basic.pause(2000)
+Firmware_version += 12
 if (bootloader_security_checksum == control.deviceSerialNumber()) {
-    music.play(music.stringPlayable("C F D F - G F C5 ", 151), music.PlaybackMode.UntilDone)
     basic.pause(200)
     basic.showLeds(`
         . . # . .
