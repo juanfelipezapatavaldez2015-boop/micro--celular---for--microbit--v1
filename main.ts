@@ -73,7 +73,7 @@ input.onButtonPressed(Button.B, function () {
             # # . # #
             . . . . .
             `)
-        if (radio.receivedPacket(RadioPacketProperty.SignalStrength) < 3) {
+        if (radio.receivedPacket(RadioPacketProperty.SignalStrength) > 1) {
             basic.showLeds(`
                 . . # . .
                 . # . # .
