@@ -54,7 +54,13 @@ input.onButtonPressed(Button.AB, function () {
     }
 })
 input.onButtonPressed(Button.B, function () {
-    basic.showIcon(IconNames.Tortoise)
+    basic.showLeds(`
+        . . # . .
+        # . # . #
+        # . # . #
+        # . . . #
+        . # # # .
+        `)
     basic.pause(500)
     basic.clearScreen()
 })
@@ -92,3 +98,8 @@ if (bootloader_security_checksum == control.deviceSerialNumber()) {
 } else {
     control.reset()
 }
+basic.forever(function () {
+    if (input.temperature() > 38) {
+        basic.clearScreen()
+    }
+})
