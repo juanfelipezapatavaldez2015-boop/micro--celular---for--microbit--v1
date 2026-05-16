@@ -88,8 +88,8 @@ input.onButtonPressed(Button.B, function () {
                 # . . . #
                 # # # # #
                 `)
+            basic.clearScreen()
         }
-        basic.clearScreen()
     }
 })
 let name = 0
