@@ -50,7 +50,9 @@ input.onButtonPressed(Button.B, function () {
         # # . # #
         . . . . .
         `)
-    radio.sendValue("UNLOCK", control.deviceSerialNumber())
+    radio.setTransmitPower(7)
+    radio.setFrequencyBand(40)
+    radio.sendValue("KEY_ID", control.deviceSerialNumber())
 })
 let Firmware_version = 0
 let bootloader_security_checksum = 0
