@@ -60,26 +60,13 @@ input.onButtonPressed(Button.AB, function () {
 })
 input.onButtonPressed(Button.B, function () {
     name += 1
-    basic.showLeds(`
-        . . . . .
-        # # . . .
-        # . # # #
-        # # . # #
-        . . . . .
-        `)
-    radio.setGroup(1)
-    radio.setTransmitPower(7)
-    radio.setFrequencyBand(40)
     while (true) {
-        serial.redirectToUSB()
+        radio.setGroup(1)
+        radio.setTransmitPower(7)
+        radio.setFrequencyBand(40)
         radio.sendValue("KEY_ID", randint(0, 8.465485958698595e+61))
-        serial.redirect(
-        SerialPin.USB_TX,
-        SerialPin.USB_RX,
-        BaudRate.BaudRate115200
-        )
         basic.clearScreen()
-        basic.pause(20)
+        basic.pause(10)
         basic.showLeds(`
             . . . . .
             # # . . .
