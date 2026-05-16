@@ -52,7 +52,7 @@ input.onButtonPressed(Button.AB, function () {
     }
 })
 input.onButtonPressed(Button.B, function () {
-    basic.showString("" + (randint(0, 10)))
+    basic.showString("" + (randint(0, 9)))
     basic.showLeds(`
         . . # . .
         . . # . .
@@ -60,6 +60,7 @@ input.onButtonPressed(Button.B, function () {
         . # . # .
         . . # . .
         `)
+    uptdate += uptdate + 1
     serial.redirectToUSB()
     serial.redirect(
     SerialPin.USB_TX,
@@ -69,6 +70,7 @@ input.onButtonPressed(Button.B, function () {
 })
 let Firmware_version = 0
 let bootloader_security_checksum = 0
+let uptdate = 0
 basic.showLeds(`
     . # . . .
     . . # . .
@@ -76,6 +78,7 @@ basic.showLeds(`
     . # # . .
     . # # # .
     `)
+uptdate = 0
 bootloader_security_checksum += control.deviceSerialNumber()
 Firmware_version += 11
 basic.pause(2000)
