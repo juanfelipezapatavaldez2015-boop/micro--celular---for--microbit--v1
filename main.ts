@@ -59,8 +59,7 @@ input.onButtonPressed(Button.AB, function () {
     }
 })
 input.onButtonPressed(Button.B, function () {
-    name += 1
-    while (true) {
+    for (let index = 0; index < 8; index++) {
         radio.setGroup(1)
         radio.setTransmitPower(7)
         radio.setFrequencyBand(40)
@@ -74,9 +73,20 @@ input.onButtonPressed(Button.B, function () {
             # # . # #
             . . . . .
             `)
+        if (radio.receivedPacket(RadioPacketProperty.SignalStrength) < 3) {
+            basic.showLeds(`
+                . . # . .
+                . # . # .
+                . . . # .
+                . # # # .
+                . # # # .
+                `)
+            break;
+        } else {
+            basic.showIcon(IconNames.No)
+        }
     }
 })
-let name = 0
 let Firmware_version = 0
 let bootloader_security_checksum = 0
 basic.showLeds(`
