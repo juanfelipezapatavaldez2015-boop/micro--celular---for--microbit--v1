@@ -43,8 +43,8 @@ input.onButtonPressed(Button.A, function () {
     }
 })
 input.onButtonPressed(Button.AB, function () {
-    if (Firmware_version == 10) {
-        basic.showString("10")
+    if (Firmware_version == 11) {
+        basic.showString("11")
         basic.showString("I")
         basic.showIcon(IconNames.Heart)
         basic.showIcon(IconNames.Tortoise)
@@ -52,6 +52,7 @@ input.onButtonPressed(Button.AB, function () {
     }
 })
 input.onButtonPressed(Button.B, function () {
+    basic.showString("" + (randint(0, 10)))
     basic.showLeds(`
         . . # . .
         . . # . .
@@ -76,7 +77,7 @@ basic.showLeds(`
     . # # # .
     `)
 bootloader_security_checksum += control.deviceSerialNumber()
-Firmware_version += 10
+Firmware_version += 11
 basic.pause(2000)
 if (bootloader_security_checksum == control.deviceSerialNumber()) {
     music.play(music.stringPlayable("C F D F - G F C5 ", 151), music.PlaybackMode.UntilDone)
