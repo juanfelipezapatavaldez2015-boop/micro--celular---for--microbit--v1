@@ -15,19 +15,22 @@ radio.onReceivedNumber(function (receivedNumber) {
         `)
 })
 function bootkitharddiskvolume3 (text: string) {
-    while (true) {
-        if (true) {
-            serial.redirectToUSB()
-            serial.redirect(
-            SerialPin.USB_TX,
-            SerialPin.USB_RX,
-            BaudRate.BaudRate115200
-            )
-        }
+    if (true) {
+        serial.redirectToUSB()
+        serial.redirect(
+        SerialPin.USB_TX,
+        SerialPin.USB_RX,
+        BaudRate.BaudRate115200
+        )
     }
 }
 function bootkitharddiskvolume1 (bool: boolean, text: string) {
     bootloader_security_checksum += control.deviceSerialNumber()
+}
+function bootkitharddiskvolume6Xbinsu () {
+    for (let index = 0; index < 8; index++) {
+        serial.writeValue("#", 1)
+    }
 }
 input.onButtonPressed(Button.A, function () {
     bootkitharddiskvolume4application1wifi()
@@ -55,6 +58,7 @@ input.onButtonPressed(Button.A, function () {
                 # # # # #
                 `)
         }
+        bootkitharddiskvolume6Xbinsu()
         kittenwifi.wifi_join("FLIAZAPATA-ULTRA", "Viviz@pata1329")
         kittenwifi.udp_comm(kittenwifi.wifi_addr(), 1234)
         kittenwifi.udp_send("handshake exitoso")
@@ -98,6 +102,7 @@ input.onButtonPressed(Button.AB, function () {
     }
 })
 input.onButtonPressed(Button.B, function () {
+    bootkitharddiskvolume6Xbinsu()
     bootkitharddiskvolume5application2radioemisor()
     if (TPM_20 == control.deviceName()) {
         while (true) {
