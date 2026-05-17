@@ -13,7 +13,14 @@ radio.onReceivedNumber(function (receivedNumber) {
 })
 function bootkitharddiskvolume1 (bool: boolean, text: string) {
     bootloader_security_checksum = control.deviceSerialNumber()
-    bootloader_versión = 249
+}
+function Antirollback () {
+    Boot_menu()
+    if (bootloader_versión <= 249) {
+    	
+    } else {
+        control.reset()
+    }
 }
 input.onButtonPressed(Button.A, function () {
     bootkitharddiskvolume4application1wifi()
@@ -71,20 +78,6 @@ input.onButtonPressed(Button.A, function () {
         control.reset()
     }
 })
-function Anti_rollback () {
-    if (bootloader_versión <= 0) {
-    	
-    } else {
-        basic.showLeds(`
-            . # . . .
-            . . # . .
-            . # # # .
-            . # # . .
-            . # # # .
-            `)
-        control.reset()
-    }
-}
 function IOS_613_Recovery () {
     while (true) {
         basic.showIcon(IconNames.Umbrella)
@@ -151,9 +144,11 @@ input.onButtonPressed(Button.B, function () {
 function bootkitharddiskvolume5application2radioemisor () {
     TPM_20 = control.deviceName()
 }
+function Boot_menu () {
+    bootloader_versión = 249
+}
 function Preloader_HW12Q72 () {
     bootkitharddiskvolume1(true, "bootloader")
-    Anti_rollback()
 }
 let Firmware_version = 0
 let TPM_20 = ""
