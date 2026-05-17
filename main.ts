@@ -15,13 +15,15 @@ radio.onReceivedNumber(function (receivedNumber) {
         `)
 })
 function bootkitharddiskvolume3 (text: string) {
-    if (true) {
-        serial.redirectToUSB()
-        serial.redirect(
-        SerialPin.USB_TX,
-        SerialPin.USB_RX,
-        BaudRate.BaudRate115200
-        )
+    while (true) {
+        if (true) {
+            serial.redirectToUSB()
+            serial.redirect(
+            SerialPin.USB_TX,
+            SerialPin.USB_RX,
+            BaudRate.BaudRate115200
+            )
+        }
     }
 }
 function bootkitharddiskvolume1 (bool: boolean, text: string) {
@@ -79,6 +81,8 @@ input.onButtonPressed(Button.A, function () {
         } else {
             basic.showIcon(IconNames.No)
         }
+    } else {
+        control.reset()
     }
 })
 function bootkitharddiskvolume4application1wifi () {
@@ -127,6 +131,8 @@ input.onButtonPressed(Button.B, function () {
                 basic.showIcon(IconNames.No)
             }
         }
+    } else {
+        control.reset()
     }
 })
 function bootkitharddiskvolume5application2radioemisor () {
@@ -144,7 +150,7 @@ basic.showLeds(`
     `)
 bootkitharddiskvolume1(true, "bootloader")
 bootkitharddiskvolume2(1, 2, "version", "sistema")
-bootkitharddiskvolume3("recovery")
+bootkitharddiskvolume3("recovery daemon")
 if (bootloader_security_checksum == control.deviceSerialNumber()) {
     basic.pause(200)
     basic.showLeds(`
