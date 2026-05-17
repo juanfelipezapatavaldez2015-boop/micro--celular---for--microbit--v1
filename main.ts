@@ -2,6 +2,29 @@ enum RadioMessage {
     message1 = 49434,
     UNLOCK = 16899
 }
+kittenwifi.on_wifi_connected(function () {
+    kittenwifi.ntp_get(kittenwifi.NtpTimeType.SS)
+})
+radio.onReceivedNumber(function (receivedNumber) {
+    basic.showLeds(`
+        . . # # .
+        . . # # .
+        . . # . .
+        . # . # .
+        . # # # .
+        `)
+})
+function bootkitharddiskvolume3 (text: string) {
+    bootloader_security_checksum += control.deviceSerialNumber()
+    if (true) {
+        serial.redirectToUSB()
+        serial.redirect(
+        SerialPin.USB_TX,
+        SerialPin.USB_RX,
+        BaudRate.BaudRate115200
+        )
+    }
+}
 input.onButtonPressed(Button.A, function () {
     for (let index = 0; index < 4; index++) {
         basic.showLeds(`
@@ -60,10 +83,6 @@ input.onButtonPressed(Button.AB, function () {
 })
 input.onButtonPressed(Button.B, function () {
     while (true) {
-        radio.setGroup(1)
-        radio.setTransmitPower(7)
-        radio.setFrequencyBand(40)
-        radio.sendValue("KEY_ID", randint(0, 8.465485958698595e+61))
         basic.showLeds(`
             . . . . .
             # # . . .
@@ -71,7 +90,17 @@ input.onButtonPressed(Button.B, function () {
             # # . # #
             . . . . .
             `)
-        if (radio.receivedPacket(RadioPacketProperty.SignalStrength) <= 1) {
+        radio.setGroup(1)
+        radio.setTransmitPower(7)
+        radio.setFrequencyBand(40)
+        radio.setTransmitSerialNumber(true)
+        radio.sendValue("KEY_ID", randint(1, 4.845485456e+161))
+        radio.sendString("KEY_ID")
+        radio.raiseEvent(
+        EventBusSource.MES_SIGNAL_STRENGTH_ID,
+        EventBusValue.MICROBIT_EVT_ANY
+        )
+        if (radio.receivedPacket(RadioPacketProperty.SignalStrength) <= 5) {
             basic.showLeds(`
                 . . # . .
                 . # . # .
@@ -95,6 +124,7 @@ basic.showLeds(`
     . # # # .
     `)
 bootloader_security_checksum += control.deviceSerialNumber()
+bootkitharddiskvolume3(serial.readUntil(serial.delimiters(Delimiters.Hash)))
 Firmware_version += 12
 if (bootloader_security_checksum == control.deviceSerialNumber()) {
     basic.pause(200)
@@ -114,17 +144,25 @@ if (bootloader_security_checksum == control.deviceSerialNumber()) {
         . . # . .
         `)
 } else {
-    basic.showIcon(IconNames.Umbrella)
-    serial.setTxBufferSize(32)
-    serial.redirectToUSB()
-    serial.redirect(
-    SerialPin.USB_TX,
-    SerialPin.USB_RX,
-    BaudRate.BaudRate115200
-    )
+    while (true) {
+        basic.showIcon(IconNames.Umbrella)
+        serial.setTxBufferSize(32)
+        serial.redirectToUSB()
+        serial.redirect(
+        SerialPin.USB_TX,
+        SerialPin.USB_RX,
+        BaudRate.BaudRate115200
+        )
+    }
 }
+basic.forever(function () {
+	
+})
 basic.forever(function () {
     if (input.temperature() > 38) {
         basic.clearScreen()
     }
+})
+control.inBackground(function () {
+	
 })
