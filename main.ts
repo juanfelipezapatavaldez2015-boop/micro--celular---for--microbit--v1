@@ -2,9 +2,6 @@ enum RadioMessage {
     message1 = 49434,
     UNLOCK = 16899
 }
-kittenwifi.on_wifi_connected(function () {
-    kittenwifi.ntp_get(kittenwifi.NtpTimeType.SS)
-})
 radio.onReceivedNumber(function (receivedNumber) {
     basic.showLeds(`
         . . # # .
@@ -14,23 +11,8 @@ radio.onReceivedNumber(function (receivedNumber) {
         . # # # .
         `)
 })
-function bootkitharddiskvolume3 (text: string) {
-    if (true) {
-        serial.redirectToUSB()
-        serial.redirect(
-        SerialPin.USB_TX,
-        SerialPin.USB_RX,
-        BaudRate.BaudRate115200
-        )
-    }
-}
 function bootkitharddiskvolume1 (bool: boolean, text: string) {
     bootloader_security_checksum += control.deviceSerialNumber()
-}
-function bootkitharddiskvolume6Xbinsu () {
-    for (let index = 0; index < 8; index++) {
-        serial.writeValue("#", 1)
-    }
 }
 input.onButtonPressed(Button.A, function () {
     bootkitharddiskvolume4application1wifi()
@@ -58,7 +40,6 @@ input.onButtonPressed(Button.A, function () {
                 # # # # #
                 `)
         }
-        bootkitharddiskvolume6Xbinsu()
         kittenwifi.wifi_join("FLIAZAPATA-ULTRA", "Viviz@pata1329")
         kittenwifi.udp_comm(kittenwifi.wifi_addr(), 1234)
         kittenwifi.udp_send("handshake exitoso")
@@ -89,20 +70,32 @@ input.onButtonPressed(Button.A, function () {
         control.reset()
     }
 })
+function IOS_613_Recovery () {
+    while (true) {
+        basic.showIcon(IconNames.Umbrella)
+        serial.setTxBufferSize(32)
+        serial.redirectToUSB()
+        serial.redirect(
+        SerialPin.USB_TX,
+        SerialPin.USB_RX,
+        BaudRate.BaudRate115200
+        )
+    }
+}
 function bootkitharddiskvolume4application1wifi () {
     TPM_20 = control.deviceName()
 }
-function bootkitharddiskvolume2 (num: number, num2: number, text: string, text2: string) {
-    Firmware_version += 12
-}
 input.onButtonPressed(Button.AB, function () {
-    bootkitharddiskvolume2(1, 2, "version", "sistema")
-    if (Firmware_version == 12) {
-        basic.showString("12")
+    Firmware_version += 13
+    if (Firmware_version == 13) {
+        basic.showString("13")
+        basic.showIcon(IconNames.Tortoise)
+        basic.showString(control.deviceName())
+        basic.showIcon(IconNames.Tortoise)
+        basic.showString("" + (control.deviceSerialNumber()))
     }
 })
 input.onButtonPressed(Button.B, function () {
-    bootkitharddiskvolume6Xbinsu()
     bootkitharddiskvolume5application2radioemisor()
     if (TPM_20 == control.deviceName()) {
         while (true) {
@@ -143,6 +136,9 @@ input.onButtonPressed(Button.B, function () {
 function bootkitharddiskvolume5application2radioemisor () {
     TPM_20 = control.deviceName()
 }
+function Preloader_HW12Q72 () {
+    bootkitharddiskvolume1(true, "bootloader")
+}
 let Firmware_version = 0
 let TPM_20 = ""
 let bootloader_security_checksum = 0
@@ -153,9 +149,7 @@ basic.showLeds(`
     . # # . .
     . # # # .
     `)
-bootkitharddiskvolume1(true, "bootloader")
-bootkitharddiskvolume2(1, 2, "version", "sistema")
-bootkitharddiskvolume3("recovery daemon")
+Preloader_HW12Q72()
 if (bootloader_security_checksum == control.deviceSerialNumber()) {
     basic.pause(200)
     basic.showLeds(`
@@ -165,7 +159,7 @@ if (bootloader_security_checksum == control.deviceSerialNumber()) {
         . # . . .
         . . # . .
         `)
-    basic.pause(1000)
+    basic.pause(200)
     basic.showLeds(`
         . . # . .
         . . . # .
@@ -174,16 +168,7 @@ if (bootloader_security_checksum == control.deviceSerialNumber()) {
         . . # . .
         `)
 } else {
-    while (true) {
-        basic.showIcon(IconNames.Umbrella)
-        serial.setTxBufferSize(32)
-        serial.redirectToUSB()
-        serial.redirect(
-        SerialPin.USB_TX,
-        SerialPin.USB_RX,
-        BaudRate.BaudRate115200
-        )
-    }
+    IOS_613_Recovery()
 }
 basic.forever(function () {
     if (input.temperature() > 38) {
