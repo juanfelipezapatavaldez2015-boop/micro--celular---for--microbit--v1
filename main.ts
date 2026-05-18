@@ -96,11 +96,14 @@ function bootkitharddiskvolume4application1wifi () {
 input.onButtonPressed(Button.AB, function () {
     Firmware_version += 13
     if (Firmware_version == 13) {
+        basic.showString("Back OS ")
         basic.showString("13")
         basic.showIcon(IconNames.Tortoise)
         basic.showString(control.deviceName())
         basic.showIcon(IconNames.Tortoise)
         basic.showString("" + (control.deviceSerialNumber()))
+        basic.showIcon(IconNames.Tortoise)
+        basic.showString("UI 3.1")
     }
 })
 input.onButtonPressed(Button.B, function () {
@@ -115,26 +118,11 @@ input.onButtonPressed(Button.B, function () {
                 . . . . .
                 `)
             radio.setGroup(1)
-            radio.setTransmitPower(7)
-            radio.setFrequencyBand(40)
-            radio.setTransmitSerialNumber(true)
-            radio.sendValue("KEY_ID", randint(1, 4.845485456e+161))
-            radio.sendString("KEY_ID")
-            radio.raiseEvent(
-            EventBusSource.MES_SIGNAL_STRENGTH_ID,
-            EventBusValue.MICROBIT_EVT_ANY
-            )
-            if (radio.receivedPacket(RadioPacketProperty.SignalStrength) <= 5) {
-                basic.showLeds(`
-                    . . # . .
-                    . # . # .
-                    . . . # .
-                    . # # # .
-                    . # # # .
-                    `)
+            radio.sendValue("Call", control.deviceSerialNumber())
+            if (radio.receivedPacket(RadioPacketProperty.SerialNumber) <= 3) {
+                basic.showIcon(IconNames.Yes)
+                music.play(music.stringPlayable("C D E F A G B C5 ", 120), music.PlaybackMode.UntilDone)
                 break;
-            } else {
-                basic.showIcon(IconNames.No)
             }
         }
     } else {
@@ -145,10 +133,11 @@ function bootkitharddiskvolume5application2radioemisor () {
     TPM_20 = control.deviceName()
 }
 function Boot_menu () {
-    bootloader_versión = 249
+    bootloader_versión = 251
 }
 function Preloader_HW12Q72 () {
     bootkitharddiskvolume1(true, "bootloader")
+    Antirollback()
 }
 let Firmware_version = 0
 let TPM_20 = ""
