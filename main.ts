@@ -3,13 +3,9 @@ enum RadioMessage {
     UNLOCK = 16899
 }
 radio.onReceivedNumber(function (receivedNumber) {
-    basic.showLeds(`
-        . . # # .
-        . . # # .
-        . . # . .
-        . # . # .
-        . # # # .
-        `)
+    if (receivedNumber != 0) {
+        basic.showIcon(IconNames.Yes)
+    }
 })
 function bootkitharddiskvolume1 (bool: boolean, text: string) {
     bootloader_security_checksum = control.deviceSerialNumber()
@@ -96,48 +92,21 @@ function bootkitharddiskvolume4application1wifi () {
 input.onButtonPressed(Button.AB, function () {
     Firmware_version += 13
     if (Firmware_version <= 13) {
-        basic.showString("14")
-        basic.showIcon(IconNames.Tortoise)
-        basic.showString(control.deviceName())
-        basic.showIcon(IconNames.Tortoise)
-        basic.showString("" + (control.deviceSerialNumber()))
+        basic.showString("15")
     }
 })
 input.onButtonPressed(Button.B, function () {
-    bootkitharddiskvolume5application2radioemisor()
-    if (TPM_20 == control.deviceName()) {
-        while (true) {
-            basic.showLeds(`
-                . . . . .
-                # # . . .
-                # . # # #
-                # # . # #
-                . . . . .
-                `)
-            radio.setGroup(1)
-            radio.setTransmitPower(7)
-            radio.setFrequencyBand(40)
-            radio.sendValue("Call", control.deviceSerialNumber())
-            if (radio.receivedPacket(RadioPacketProperty.SerialNumber) <= 5) {
-                basic.showLeds(`
-                    . . # . .
-                    . # . # .
-                    . . . # .
-                    . # # # .
-                    . # # # .
-                    `)
-                break;
-            } else {
-                basic.showIcon(IconNames.No)
-            }
-        }
-    } else {
-        control.reset()
-    }
+    basic.showLeds(`
+        . . . . .
+        # # . . .
+        # . # # #
+        # # . # #
+        . . . . .
+        `)
+    radio.setGroup(1)
+    radio.setTransmitPower(7)
+    radio.sendNumber(control.deviceSerialNumber())
 })
-function bootkitharddiskvolume5application2radioemisor () {
-    TPM_20 = control.deviceName()
-}
 function Boot_menu () {
     bootloader_versión = 249
 }
