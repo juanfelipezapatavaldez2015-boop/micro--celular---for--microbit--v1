@@ -95,8 +95,8 @@ function bootkitharddiskvolume4application1wifi () {
 }
 input.onButtonPressed(Button.AB, function () {
     Firmware_version += 13
-    if (Firmware_version == 13) {
-        basic.showString("13")
+    if (Firmware_version <= 13) {
+        basic.showString("14")
         basic.showIcon(IconNames.Tortoise)
         basic.showString(control.deviceName())
         basic.showIcon(IconNames.Tortoise)
@@ -117,14 +117,8 @@ input.onButtonPressed(Button.B, function () {
             radio.setGroup(1)
             radio.setTransmitPower(7)
             radio.setFrequencyBand(40)
-            radio.setTransmitSerialNumber(true)
-            radio.sendValue("KEY_ID", randint(1, 4.845485456e+161))
-            radio.sendString("KEY_ID")
-            radio.raiseEvent(
-            EventBusSource.MES_SIGNAL_STRENGTH_ID,
-            EventBusValue.MICROBIT_EVT_ANY
-            )
-            if (radio.receivedPacket(RadioPacketProperty.SignalStrength) <= 5) {
+            radio.sendValue("Call", control.deviceSerialNumber())
+            if (radio.receivedPacket(RadioPacketProperty.SerialNumber) <= 5) {
                 basic.showLeds(`
                     . . # . .
                     . # . # .
