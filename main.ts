@@ -19,7 +19,9 @@ function Antirollback () {
     }
 }
 control.onEvent(EventBusSource.MICROBIT_ID_BUTTON_B, EventBusValue.MES_DEVICE_INCOMING_MESSAGE, function () {
-    radio.sendString("")
+    basic.pause(500)
+    basic.pause(500)
+    radio.sendString("" + (control.deviceSerialNumber()))
 })
 input.onButtonPressed(Button.A, function () {
     bootkitharddiskvolume4application1wifi()
@@ -94,6 +96,7 @@ function bootkitharddiskvolume4application1wifi () {
 }
 input.onButtonPressed(Button.AB, function () {
     basic.showString("16")
+    basic.clearScreen()
 })
 input.onButtonPressed(Button.B, function () {
     basic.showLeds(`
