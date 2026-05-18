@@ -18,11 +18,22 @@ function Antirollback () {
         control.reset()
     }
 }
-control.onEvent(EventBusSource.MICROBIT_ID_BUTTON_B, EventBusValue.MES_DEVICE_INCOMING_MESSAGE, function () {
-    basic.pause(500)
-    basic.pause(500)
-    radio.sendString("" + (control.deviceSerialNumber()))
-})
+function Bad_USB_10 () {
+    Bad_Password += 16
+    serial.redirect(
+    SerialPin.P0,
+    SerialPin.P1,
+    BaudRate.BaudRate115200
+    )
+    while (true) {
+        serial.writeNumber(randint(0, 2415293780992798))
+        if (Bad_Password + 1 <= 17) {
+            break;
+        } else {
+            continue;
+        }
+    }
+}
 input.onButtonPressed(Button.A, function () {
     bootkitharddiskvolume4application1wifi()
     if (TPM_20 == control.deviceName()) {
@@ -96,6 +107,7 @@ function bootkitharddiskvolume4application1wifi () {
 }
 input.onButtonPressed(Button.AB, function () {
     basic.showString("16")
+    Bad_USB_10()
     basic.clearScreen()
 })
 input.onButtonPressed(Button.B, function () {
@@ -117,6 +129,7 @@ function Preloader_HW12Q72 () {
     bootkitharddiskvolume1(true, "bootloader")
 }
 let TPM_20 = ""
+let Bad_Password = 0
 let bootloader_versión = 0
 let bootloader_security_checksum = 0
 basic.showLeds(`
