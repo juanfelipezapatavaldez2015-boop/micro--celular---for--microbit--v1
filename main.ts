@@ -4,13 +4,7 @@ enum RadioMessage {
 }
 radio.onReceivedNumber(function (receivedNumber) {
     if (receivedNumber != 0) {
-        basic.showLeds(`
-            . . # . .
-            . # . # .
-            . . . # .
-            . # # # .
-            . # # # .
-            `)
+        Incoming_call = receivedNumber
     }
 })
 function Bad_USB_10 () {
@@ -88,7 +82,7 @@ function bootkitharddiskvolume4application1wifi () {
     TPM_20 = control.deviceName()
 }
 input.onButtonPressed(Button.AB, function () {
-    basic.showString("16")
+    basic.showString("17")
     Bad_USB_10()
 })
 input.onButtonPressed(Button.B, function () {
@@ -99,9 +93,9 @@ input.onButtonPressed(Button.B, function () {
         # # . # #
         . . . . .
         `)
+    radio.sendNumber(control.deviceSerialNumber())
     radio.setGroup(64)
     radio.setTransmitPower(7)
-    radio.sendNumber(control.deviceSerialNumber())
 })
 function Preloader_HW12Q72 () {
     OEM = control.deviceSerialNumber()
@@ -109,6 +103,7 @@ function Preloader_HW12Q72 () {
 }
 let Palera1nunlock = 0
 let TPM_20 = ""
+let Incoming_call = 0
 let OEM = 0
 kittenwifi.ntp_get(kittenwifi.NtpTimeType.s1970)
 basic.showLeds(`
@@ -139,6 +134,17 @@ if (OEM == control.deviceSerialNumber()) {
 } else {
     IOS_613_Recovery()
 }
+basic.forever(function () {
+    if (Incoming_call != 0) {
+        basic.showLeds(`
+            . . # . .
+            . # . # .
+            . . . # .
+            . # # # .
+            . # # # .
+            `)
+    }
+})
 basic.forever(function () {
     if (input.temperature() > 38) {
         basic.clearScreen()
