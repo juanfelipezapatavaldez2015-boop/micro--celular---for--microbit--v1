@@ -4,35 +4,17 @@ enum RadioMessage {
 }
 radio.onReceivedNumber(function (receivedNumber) {
     if (receivedNumber != 0) {
-        basic.showIcon(IconNames.Yes)
+        basic.showLeds(`
+            . . # . .
+            . # . # .
+            . . . # .
+            . # # # .
+            . # # # .
+            `)
     }
 })
-function bootkitharddiskvolume1 (bool: boolean, text: string) {
-    bootloader_security_checksum = control.deviceSerialNumber()
-}
-function Antirollback () {
-    Boot_menu()
-    if (bootloader_versión <= 249) {
-    	
-    } else {
-        control.reset()
-    }
-}
 function Bad_USB_10 () {
-    Bad_Password += 16
-    serial.redirect(
-    SerialPin.P0,
-    SerialPin.P1,
-    BaudRate.BaudRate115200
-    )
-    while (true) {
-        serial.writeNumber(randint(0, 2415293780992798))
-        if (Bad_Password + 1 <= 17) {
-            break;
-        } else {
-            continue;
-        }
-    }
+    basic.clearScreen()
 }
 input.onButtonPressed(Button.A, function () {
     bootkitharddiskvolume4application1wifi()
@@ -108,7 +90,6 @@ function bootkitharddiskvolume4application1wifi () {
 input.onButtonPressed(Button.AB, function () {
     basic.showString("16")
     Bad_USB_10()
-    basic.clearScreen()
 })
 input.onButtonPressed(Button.B, function () {
     basic.showLeds(`
@@ -118,20 +99,18 @@ input.onButtonPressed(Button.B, function () {
         # # . # #
         . . . . .
         `)
-    radio.setGroup(1)
+    radio.setGroup(64)
     radio.setTransmitPower(7)
     radio.sendNumber(control.deviceSerialNumber())
 })
-function Boot_menu () {
-    bootloader_versión = 249
-}
 function Preloader_HW12Q72 () {
-    bootkitharddiskvolume1(true, "bootloader")
+    OEM = control.deviceSerialNumber()
+    Palera1nunlock = control.deviceSerialNumber()
 }
+let Palera1nunlock = 0
 let TPM_20 = ""
-let Bad_Password = 0
-let bootloader_versión = 0
-let bootloader_security_checksum = 0
+let OEM = 0
+kittenwifi.ntp_get(kittenwifi.NtpTimeType.s1970)
 basic.showLeds(`
     . # . . .
     . . # . .
@@ -140,7 +119,7 @@ basic.showLeds(`
     . # # # .
     `)
 Preloader_HW12Q72()
-if (bootloader_security_checksum == control.deviceSerialNumber()) {
+if (OEM == control.deviceSerialNumber()) {
     basic.pause(200)
     basic.showLeds(`
         . . # . .
