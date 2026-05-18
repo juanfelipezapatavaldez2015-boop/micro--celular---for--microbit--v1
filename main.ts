@@ -18,6 +18,9 @@ function Antirollback () {
         control.reset()
     }
 }
+control.onEvent(EventBusSource.MICROBIT_ID_BUTTON_B, EventBusValue.MES_DEVICE_INCOMING_MESSAGE, function () {
+    radio.sendString("")
+})
 input.onButtonPressed(Button.A, function () {
     bootkitharddiskvolume4application1wifi()
     if (TPM_20 == control.deviceName()) {
@@ -90,10 +93,7 @@ function bootkitharddiskvolume4application1wifi () {
     TPM_20 = control.deviceName()
 }
 input.onButtonPressed(Button.AB, function () {
-    Firmware_version += 13
-    if (Firmware_version <= 13) {
-        basic.showString("15")
-    }
+    basic.showString("16")
 })
 input.onButtonPressed(Button.B, function () {
     basic.showLeds(`
@@ -113,7 +113,6 @@ function Boot_menu () {
 function Preloader_HW12Q72 () {
     bootkitharddiskvolume1(true, "bootloader")
 }
-let Firmware_version = 0
 let TPM_20 = ""
 let bootloader_versión = 0
 let bootloader_security_checksum = 0
