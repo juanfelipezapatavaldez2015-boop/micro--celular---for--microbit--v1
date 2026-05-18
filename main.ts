@@ -94,16 +94,13 @@ function bootkitharddiskvolume4application1wifi () {
     TPM_20 = control.deviceName()
 }
 input.onButtonPressed(Button.AB, function () {
-    Firmware_version += 13
+    Firmware_version += 14
     if (Firmware_version == 13) {
-        basic.showString("Back OS ")
-        basic.showString("13")
+        basic.showString("14")
         basic.showIcon(IconNames.Tortoise)
         basic.showString(control.deviceName())
         basic.showIcon(IconNames.Tortoise)
         basic.showString("" + (control.deviceSerialNumber()))
-        basic.showIcon(IconNames.Tortoise)
-        basic.showString("UI 3.1")
     }
 })
 input.onButtonPressed(Button.B, function () {
