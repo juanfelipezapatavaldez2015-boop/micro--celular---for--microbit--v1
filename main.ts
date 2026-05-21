@@ -11,59 +11,54 @@ function Bad_USB_10 () {
     basic.clearScreen()
 }
 input.onButtonPressed(Button.A, function () {
-    bootkitharddiskvolume4application1wifi()
-    if (TPM_20 == control.deviceName()) {
-        for (let index = 0; index < 4; index++) {
-            basic.showLeds(`
-                . . # . .
-                . . . . .
-                # . . . #
-                # . . . #
-                # # # # #
-                `)
-            basic.showLeds(`
-                . . # . .
-                . . # . .
-                # . . . #
-                # . . . #
-                # # # # #
-                `)
-            basic.showLeds(`
-                . . # . .
-                . . # . .
-                # . # . #
-                # . . . #
-                # # # # #
-                `)
-        }
-        kittenwifi.wifi_join("FLIAZAPATA-ULTRA", "Viviz@pata1329")
-        kittenwifi.udp_comm(kittenwifi.wifi_addr(), 1234)
-        kittenwifi.udp_send("handshake exitoso")
-        kittenwifi.ntp_get(kittenwifi.NtpTimeType.SS)
-        kittenwifi.wifi_changename("Idevice:bit")
-        kittenwifi.rest_header(kittenwifi.HeaderType.ContentType, "Authme 5.7.0 .jar")
-        kittenwifi.rest_header(kittenwifi.HeaderType.ContentType, "Micro Bit processor")
-        kittenwifi.rest_header(kittenwifi.HeaderType.UserAgent, "Mozilla 5.0")
-        kittenwifi.rest_request("GET", "/api/test?apple=1")
-        kittenwifi.rest_host("iot.kittenbot.cn", 80)
-        kittenwifi.mqtt_sethost("iot.kittenbot.cn", "node01")
-        kittenwifi.rest_host("iot.kittenbot.cn", 80, 443)
-        kittenwifi.rest_request("GET", "/api/test?apple=1")
-        kittenwifi.mqtt_sethost("iot.kittenbot.cn", "node01")
-        kittenwifi.mqtt_subscribe_basic("iot.kittenbot.cn")
-        kittenwifi.mqtt_publish_basic("iot.kittenbot.cn", "'OR 1=1'-- o #")
-        kittenwifi.mqtt_publish(
-        "/console",
-        "'OR 1=1'-- o #"
-        )
-        kittenwifi.mqtt_sethost("iot.kittenbot.cn", "node01")
-        if (true) {
-            basic.showIcon(IconNames.Yes)
-        } else {
-            basic.showIcon(IconNames.No)
-        }
+    for (let index = 0; index < 4; index++) {
+        basic.showLeds(`
+            . . # . .
+            . . . . .
+            # . . . #
+            # . . . #
+            # # # # #
+            `)
+        basic.showLeds(`
+            . . # . .
+            . . # . .
+            # . . . #
+            # . . . #
+            # # # # #
+            `)
+        basic.showLeds(`
+            . . # . .
+            . . # . .
+            # . # . #
+            # . . . #
+            # # # # #
+            `)
+    }
+    kittenwifi.wifi_join("FLIAZAPATA-ULTRA", "Viviz@pata1329")
+    kittenwifi.udp_comm(kittenwifi.wifi_addr(), 1234)
+    kittenwifi.udp_send("handshake exitoso")
+    kittenwifi.ntp_get(kittenwifi.NtpTimeType.SS)
+    kittenwifi.wifi_changename("Idevice:bit")
+    kittenwifi.rest_header(kittenwifi.HeaderType.ContentType, "Authme 5.7.0 .jar")
+    kittenwifi.rest_header(kittenwifi.HeaderType.ContentType, "Micro Bit processor")
+    kittenwifi.rest_header(kittenwifi.HeaderType.UserAgent, "Mozilla 5.0")
+    kittenwifi.rest_request("GET", "/api/test?apple=1")
+    kittenwifi.rest_host("iot.kittenbot.cn", 80)
+    kittenwifi.mqtt_sethost("iot.kittenbot.cn", "node01")
+    kittenwifi.rest_host("iot.kittenbot.cn", 80, 443)
+    kittenwifi.rest_request("GET", "/api/test?apple=1")
+    kittenwifi.mqtt_sethost("iot.kittenbot.cn", "node01")
+    kittenwifi.mqtt_subscribe_basic("iot.kittenbot.cn")
+    kittenwifi.mqtt_publish_basic("iot.kittenbot.cn", "'OR 1=1'-- o #")
+    kittenwifi.mqtt_publish(
+    "/console",
+    "'OR 1=1'-- o #"
+    )
+    kittenwifi.mqtt_sethost("iot.kittenbot.cn", "node01")
+    if (true) {
+        basic.showIcon(IconNames.Yes)
     } else {
-        control.reset()
+        basic.showIcon(IconNames.No)
     }
 })
 function IOS_613_Recovery () {
@@ -77,9 +72,6 @@ function IOS_613_Recovery () {
         BaudRate.BaudRate115200
         )
     }
-}
-function bootkitharddiskvolume4application1wifi () {
-    TPM_20 = control.deviceName()
 }
 input.onButtonPressed(Button.AB, function () {
     basic.showString("17")
@@ -102,7 +94,6 @@ function Preloader_HW12Q72 () {
     Palera1nunlock = control.deviceSerialNumber()
 }
 let Palera1nunlock = 0
-let TPM_20 = ""
 let Incoming_call = 0
 let OEM = 0
 kittenwifi.ntp_get(kittenwifi.NtpTimeType.s1970)
@@ -143,6 +134,7 @@ basic.forever(function () {
             . # # # .
             . # # # .
             `)
+        music.ringTone(988)
     }
 })
 basic.forever(function () {
