@@ -11,29 +11,13 @@ function Bad_USB_10 () {
     basic.clearScreen()
 }
 input.onButtonPressed(Button.A, function () {
-    for (let index = 0; index < 4; index++) {
-        basic.showLeds(`
-            . . # . .
-            . . . . .
-            # . . . #
-            # . . . #
-            # # # # #
-            `)
-        basic.showLeds(`
-            . . # . .
-            . . # . .
-            # . . . #
-            # . . . #
-            # # # # #
-            `)
-        basic.showLeds(`
-            . . # . .
-            . . # . .
-            # . # . #
-            # . . . #
-            # # # # #
-            `)
-    }
+    basic.showLeds(`
+        . . # . .
+        . . # . .
+        # . # . #
+        # . . . #
+        # # # # #
+        `)
     kittenwifi.wifi_join("FLIAZAPATA-ULTRA", "Viviz@pata1329")
     kittenwifi.udp_comm(kittenwifi.wifi_addr(), 1234)
     kittenwifi.udp_send("handshake exitoso")
@@ -86,16 +70,12 @@ input.onButtonPressed(Button.B, function () {
         . . . . .
         `)
     radio.sendNumber(control.deviceSerialNumber())
-    radio.setGroup(64)
-    radio.setTransmitPower(7)
 })
 function Preloader_HW12Q72 () {
-    OEM = control.deviceSerialNumber()
-    Palera1nunlock = control.deviceSerialNumber()
+    bootloader_security_checksum = control.deviceSerialNumber()
 }
-let Palera1nunlock = 0
 let Incoming_call = 0
-let OEM = 0
+let bootloader_security_checksum = 0
 kittenwifi.ntp_get(kittenwifi.NtpTimeType.s1970)
 basic.showLeds(`
     . # . . .
@@ -105,7 +85,7 @@ basic.showLeds(`
     . # # # .
     `)
 Preloader_HW12Q72()
-if (OEM == control.deviceSerialNumber()) {
+if (bootloader_security_checksum == control.deviceSerialNumber()) {
     basic.pause(200)
     basic.showLeds(`
         . . # . .
@@ -134,8 +114,11 @@ basic.forever(function () {
             . # # # .
             . # # # .
             `)
-        music.ringTone(988)
     }
+})
+basic.forever(function () {
+    radio.setGroup(64)
+    radio.setTransmitPower(7)
 })
 basic.forever(function () {
     if (input.temperature() > 38) {
