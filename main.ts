@@ -7,9 +7,6 @@ radio.onReceivedNumber(function (receivedNumber) {
         Incoming_call = receivedNumber
     }
 })
-function Bad_USB_10 () {
-    basic.clearScreen()
-}
 input.onButtonPressed(Button.A, function () {
     basic.showLeds(`
         . . # . .
@@ -45,6 +42,10 @@ input.onButtonPressed(Button.A, function () {
         basic.showIcon(IconNames.No)
     }
 })
+function SDK_services () {
+    kittenwifi.wifi_changename("Iframework")
+    kittenwifi.ntp_get(kittenwifi.NtpTimeType.s1970)
+}
 function IOS_613_Recovery () {
     while (true) {
         basic.showIcon(IconNames.Umbrella)
@@ -59,7 +60,6 @@ function IOS_613_Recovery () {
 }
 input.onButtonPressed(Button.AB, function () {
     basic.showString("17")
-    Bad_USB_10()
 })
 input.onButtonPressed(Button.B, function () {
     basic.showLeds(`
@@ -72,11 +72,11 @@ input.onButtonPressed(Button.B, function () {
     radio.sendNumber(control.deviceSerialNumber())
 })
 function Preloader_HW12Q72 () {
+    SDK_services()
     bootloader_security_checksum = control.deviceSerialNumber()
 }
 let Incoming_call = 0
 let bootloader_security_checksum = 0
-kittenwifi.ntp_get(kittenwifi.NtpTimeType.s1970)
 basic.showLeds(`
     . # . . .
     . . # . .
