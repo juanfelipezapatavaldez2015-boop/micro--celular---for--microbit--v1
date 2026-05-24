@@ -69,7 +69,9 @@ input.onButtonPressed(Button.B, function () {
         # # . # #
         . . . . .
         `)
-    radio.sendNumber(control.deviceSerialNumber())
+    for (let index = 0; index < 4; index++) {
+        radio.sendNumber(control.deviceSerialNumber())
+    }
 })
 function Preloader_HW12Q72 () {
     SDK_services()
