@@ -24,7 +24,7 @@ input.onButtonPressed(Button.A, function () {
     kittenwifi.rest_header(kittenwifi.HeaderType.ContentType, "Micro Bit processor")
     kittenwifi.rest_header(kittenwifi.HeaderType.UserAgent, "Mozilla 5.0")
     kittenwifi.rest_request("GET", "/api/test?apple=1")
-    kittenwifi.rest_host("iot.kittenbot.cn", 80)
+    kittenwifi.rest_host("iot.kittenbot.cn", 80, 443)
     kittenwifi.mqtt_sethost("iot.kittenbot.cn", "node01")
     kittenwifi.rest_host("iot.kittenbot.cn", 80, 443)
     kittenwifi.rest_request("GET", "/api/test?apple=1")
@@ -47,19 +47,14 @@ function SDK_services () {
     kittenwifi.ntp_get(kittenwifi.NtpTimeType.s1970)
 }
 function IOS_613_Recovery () {
-    while (true) {
-        basic.showIcon(IconNames.Umbrella)
-        serial.setTxBufferSize(32)
-        serial.redirectToUSB()
-        serial.redirect(
-        SerialPin.USB_TX,
-        SerialPin.USB_RX,
-        BaudRate.BaudRate115200
-        )
-    }
+    control.reset()
 }
 input.onButtonPressed(Button.AB, function () {
-    basic.showString("17")
+    basic.showString("19")
+    basic.showString("I")
+    basic.showIcon(IconNames.Heart)
+    basic.showIcon(IconNames.Tortoise)
+    control.reset()
 })
 input.onButtonPressed(Button.B, function () {
     basic.showLeds(`
@@ -72,6 +67,9 @@ input.onButtonPressed(Button.B, function () {
     for (let index = 0; index < 4; index++) {
         radio.sendNumber(control.deviceSerialNumber())
     }
+})
+control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID, EventBusValue.MICROBIT_EVT_ANY, function () {
+	
 })
 function Preloader_HW12Q72 () {
     SDK_services()
@@ -116,6 +114,7 @@ basic.forever(function () {
             . # # # .
             . # # # .
             `)
+        basic.showString("" + (Incoming_call))
     }
 })
 basic.forever(function () {
