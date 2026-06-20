@@ -33,27 +33,20 @@ input.onButtonPressed(Button.A, function () {
         # . . . #
         # # # # #
         `)
-    kittenwifi.wifi_join("FLIAZAPATA-ULTRA", "Viviz@pata1329")
-    kittenwifi.udp_comm(kittenwifi.wifi_addr(), 1234)
-    kittenwifi.udp_send("handshake exitoso")
-    kittenwifi.ntp_get(kittenwifi.NtpTimeType.SS)
-    kittenwifi.wifi_changename("Idevice:bit")
-    kittenwifi.rest_header(kittenwifi.HeaderType.ContentType, "Authme 5.7.0 .jar")
-    kittenwifi.rest_header(kittenwifi.HeaderType.ContentType, "Micro Bit processor")
-    kittenwifi.rest_header(kittenwifi.HeaderType.UserAgent, "Mozilla 5.0")
-    kittenwifi.rest_request("GET", "/api/test?apple=1")
-    kittenwifi.rest_host("iot.kittenbot.cn", 80, 443)
-    kittenwifi.mqtt_sethost("iot.kittenbot.cn", "node01")
-    kittenwifi.rest_host("iot.kittenbot.cn", 80, 443)
-    kittenwifi.rest_request("GET", "/api/test?apple=1")
-    kittenwifi.mqtt_sethost("iot.kittenbot.cn", "node01")
-    kittenwifi.mqtt_subscribe_basic("iot.kittenbot.cn")
-    kittenwifi.mqtt_publish_basic("iot.kittenbot.cn", "'OR 1=1'-- o #")
-    kittenwifi.mqtt_publish(
-    "/console",
+    sistema_wifi()
+    WiFiBit.connectToWiFiNetwork(llave_ssid, contraseña_wifi)
+    WiFiBit.executeHttpMethod(
+    HttpMethod.CONNECT,
+    "",
+    1234,
     "'OR 1=1'-- o #"
     )
-    kittenwifi.mqtt_sethost("iot.kittenbot.cn", "node01")
+    WiFiBit.executeHttpMethod(
+    HttpMethod.PATCH,
+    kittenwifi.wifi_addr(),
+    1234,
+    WiFiBit.readBlynkIoTPinValue("V1", "BzMEzpZ9Bud9ZUXZoJVEkbfneCavDVDx")
+    )
     if (true) {
         basic.showIcon(IconNames.Yes)
     } else {
@@ -62,6 +55,10 @@ input.onButtonPressed(Button.A, function () {
 })
 function Restart () {
     control.reset()
+}
+function sistema_wifi () {
+    llave_ssid = "FLIAZAPATA-ULTRA"
+    contraseña_wifi = "Viviz@pata1329"
 }
 function IOS_613_Recovery () {
     control.reset()
@@ -122,6 +119,8 @@ function BOOTROM () {
         # . # . #
         `)
 }
+let contraseña_wifi = ""
+let llave_ssid = ""
 let Incoming_call = 0
 let bootloader_security_checksum = 0
 basic.showLeds(`
