@@ -1,12 +1,30 @@
 enum RadioMessage {
-    message1 = 49434,
-    UNLOCK = 16899
+    UNLOCK = 16899,
+    message1 = 49434
 }
 radio.onReceivedNumber(function (receivedNumber) {
     if (receivedNumber != 0) {
         Incoming_call = receivedNumber
     }
 })
+function bootloader_mode () {
+    basic.showLeds(`
+        . . # . .
+        . . # . .
+        . . # . .
+        . . . . .
+        . . # . .
+        `)
+    while (true) {
+        serial.redirectToUSB()
+        serial.setBaudRate(BaudRate.BaudRate115200)
+        serial.redirect(
+        SerialPin.USB_TX,
+        SerialPin.USB_RX,
+        BaudRate.BaudRate115200
+        )
+    }
+}
 input.onButtonPressed(Button.A, function () {
     basic.showLeds(`
         . . # . .
@@ -42,20 +60,23 @@ input.onButtonPressed(Button.A, function () {
         basic.showIcon(IconNames.No)
     }
 })
-function SDK_services () {
-    kittenwifi.wifi_changename("Iframework")
-    kittenwifi.ntp_get(kittenwifi.NtpTimeType.s1970)
+function Restart () {
+    control.reset()
 }
 function IOS_613_Recovery () {
     control.reset()
 }
 input.onButtonPressed(Button.AB, function () {
-    basic.showString("19")
+    basic.showString("20")
     basic.showString("I")
     basic.showIcon(IconNames.Heart)
     basic.showIcon(IconNames.Tortoise)
     control.reset()
 })
+function Preloader_HW12Q72 () {
+    SDK_services()
+    bootloader_security_checksum = control.deviceSerialNumber()
+}
 input.onButtonPressed(Button.B, function () {
     basic.showLeds(`
         . . . . .
@@ -68,12 +89,38 @@ input.onButtonPressed(Button.B, function () {
         radio.sendNumber(control.deviceSerialNumber())
     }
 })
-control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID, EventBusValue.MICROBIT_EVT_ANY, function () {
-	
-})
-function Preloader_HW12Q72 () {
-    SDK_services()
-    bootloader_security_checksum = control.deviceSerialNumber()
+function BIOS_2000 () {
+    basic.showLeds(`
+        . . # . .
+        . . # . .
+        # . # . #
+        # . . . #
+        # # # # #
+        `)
+    while (true) {
+        if (input.buttonIsPressed(Button.A)) {
+            bootloader_mode()
+        }
+        if (input.buttonIsPressed(Button.B)) {
+            BOOTROM()
+        }
+        if (input.buttonIsPressed(Button.AB)) {
+            Restart()
+        }
+    }
+}
+function SDK_services () {
+    kittenwifi.wifi_changename("Iframework")
+    kittenwifi.ntp_get(kittenwifi.NtpTimeType.s1970)
+}
+function BOOTROM () {
+    basic.showLeds(`
+        # . # . #
+        . . . . .
+        # . # . #
+        . . . . .
+        # . # . #
+        `)
 }
 let Incoming_call = 0
 let bootloader_security_checksum = 0
@@ -85,6 +132,9 @@ basic.showLeds(`
     . # # # .
     `)
 Preloader_HW12Q72()
+if (input.buttonIsPressed(Button.B)) {
+    BIOS_2000()
+}
 if (bootloader_security_checksum == control.deviceSerialNumber()) {
     basic.pause(200)
     basic.showLeds(`
